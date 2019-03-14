@@ -42,7 +42,7 @@ class UserModel(db.Model):
 
 class UserSchema(ma.TableSchema):
     class Meta:
-        fields = ('first_name', 'last_name', 'age')
+        fields = ('id', 'first_name', 'last_name', 'age')
 
 
 user_schema = UserSchema()
