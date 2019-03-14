@@ -7,6 +7,11 @@ services:
       - db
     ports:
       - "3000:3000"
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "8080:8080"
   db:
     image: mysql:latest
     container_name: database
