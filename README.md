@@ -10,6 +10,7 @@
 1. [Team](#Team)
 
 ## Disclaimers
+
 The `frontend` folder has been created through a [vue-cli](https://cli.vuejs.org/) basic configuration.
 
 ## Getting Started
@@ -25,8 +26,8 @@ Vue frontend is reachable through `http://localhost:8080`.
 
 ## Team
 
-|              Name              | GitHub Username |                   Email                   |
-| :----------------------------: | :-------------: | :---------------------------------------: |
-|       Quaresma, Clément        |     quaresc     |       clement.quaresma.1@ulaval.ca        |
-|       Tanguy, Anne-Sophie        |     tanguy-a     |       anne-sophie.tanguy.1@ulaval.ca        |
-|       Heraud, Baptiste        |     Mandrilux     |       baptiste.heraud.1@ulaval.ca        |
+|      IDUL     |              Name              | GitHub Username |                   Email                   |
+| :-----------: | :----------------------------: | :-------------: | :---------------------------------------: |
+|  111 244 593  |       Quaresma, Clément        |     quaresc     |       clement.quaresma.1@ulaval.ca        |
+|  111 244 605  |       Tanguy, Anne-Sophie      |     tanguy-a    |       anne-sophie.tanguy.1@ulaval.ca      |
+|  111 244 580  |       Heraud, Baptiste         |     Mandrilux   |       baptiste.heraud.1@ulaval.ca         |
