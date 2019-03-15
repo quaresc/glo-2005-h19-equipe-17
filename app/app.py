@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from models.UserModel import UserModel
+import os
 
 app = Flask("GLO-2005")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@database/glo_2005'
@@ -31,4 +32,4 @@ def get_user(id):
     return jsonify(user)
 
 
-app.run(host="0.0.0.0", port=3000)
+app.run(host="0.0.0.0", port=os.environ['PORT'])

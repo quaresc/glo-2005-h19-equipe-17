@@ -25,11 +25,9 @@ export default {
   },
   async mounted() {
     try {
-      console.log("Fetching users");
       this.users = await HTTP.get("/users").then(response => {
         return response.data;
       });
-      console.log(this.users);
     } catch (error) {
       console.error(error);
     }

@@ -1,6 +1,5 @@
 from . import db
 from . import ma
-import logging
 
 
 class UserModel(db.Model):

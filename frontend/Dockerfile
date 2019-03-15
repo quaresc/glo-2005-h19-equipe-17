@@ -1,6 +1,6 @@
 FROM node:lts-alpine
 
-EXPOSE 8080
+EXPOSE ${PORT}
 
 RUN yarn global add http-server
 

@@ -2,7 +2,7 @@
 FROM python:3.7-slim
 
 # L'application va écouter sur le port 3000
-EXPOSE 3000
+EXPOSE ${PORT}
 
 # Mettre le code de l’application dans le répertoire / de l’image
 WORKDIR /
