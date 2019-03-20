@@ -15,9 +15,6 @@ import { HTTP } from "@/plugins/axios";
 
 export default {
   name: "Users",
-  props: {
-    msg: String
-  },
   data() {
     return {
       users: null

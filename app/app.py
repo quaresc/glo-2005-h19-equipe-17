@@ -1,14 +1,15 @@
+import os
+import pymysql.cursors
 from flask import Flask, jsonify
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-from models.UserModel import UserModel
-import os
 
 app = Flask("GLO-2005")
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@database/glo_2005'
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
+connection = pymysql.connect(host='database',
+                             user='root',
+                             password='root',
+                             db='glo_2005',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
 
 CORS(app)
 
@@ -20,13 +21,24 @@ def index():
 
 @app.route("/users", methods=["GET"])
 def get_users():
-    users = UserModel.get_users()
+    sql_get_users = ("SELECT `*` FROM `users`")
+
+    cursor = connection.cursor()
+    cursor.execute(sql_get_users)
+
+    users = cursor.fetchall()
     return jsonify(users)
 
 
 @app.route("/users/<id>", methods=["GET"])
 def get_user(id):
-    user = UserModel.get_user(id)
+    sql_get_user = ("SELECT `*` FROM `users` WHERE `id`=%s")
+
+    cursor = connection.cursor()
+    cursor.execute(sql_get_user, (id))
+
+    user = cursor.fetchone()
+
     if not user:
         return jsonify(message=f"User '{id}' does not exist."), 400
     return jsonify(user)
