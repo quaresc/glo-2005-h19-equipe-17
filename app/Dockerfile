@@ -16,5 +16,8 @@ RUN pip install -r requirements.txt
 # Copier le code de l’application dans le répertoire /
 ADD . /
 
-# Lancer le script app.py quand le container démarre
-CMD ["python","-u","app.py"]
+# Rendre exécutable le script pour attendre que la db se lance
+RUN chmod +x /wait-for-it.sh
+
+# Attendre que la db se lance sans timeout puis lancer le script app.py quand le container démarre
+CMD /wait-for-it.sh database:3306 -t 0 && python -u app.py

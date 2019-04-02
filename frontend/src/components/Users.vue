@@ -2,8 +2,8 @@
   <div>
     <ul>
       <li v-for="user in users" :key="user.id">
-        {{ user.first_name }}
-        {{ user.last_name }}
+        {{ user.firstName }}
+        {{ user.lastName }}
         {{ user.age }}
       </li>
     </ul>
