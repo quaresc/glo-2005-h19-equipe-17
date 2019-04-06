@@ -119,6 +119,7 @@ DROP TABLE IF EXISTS invoice_products;
 CREATE TABLE IF NOT EXISTS invoice_products (
   invoice_id INT NOT NULL,
   product_id INT NOT NULL,
+  quantity INT UNSIGNED NOT NULL,
   INDEX fk__invoice_products__products_idx (product_id ASC),
   INDEX fk__invoice_products__invoice_idx (invoice_id ASC),
   CONSTRAINT fk__invoice_products__products
