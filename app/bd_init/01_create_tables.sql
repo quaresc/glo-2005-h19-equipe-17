@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS products (
   id INT NOT NULL AUTO_INCREMENT,
   ean VARCHAR(13) NOT NULL,
   name VARCHAR(250) NOT NULL,
-  description VARCHAR(250) NOT NULL,
+  description VARCHAR(1000) NOT NULL,
   product_type_id INT NOT NULL,
   company VARCHAR(45) NOT NULL,
   price DOUBLE(5,2) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS products (
   quantity INT UNSIGNED NOT NULL,
   image_url TEXT NOT NULL,
   PRIMARY KEY (id),
-  UNIQUE INDEX name_UNIQUE (name ASC),
+  UNIQUE INDEX ean_UNIQUE (ean ASC),
   INDEX fk__products__products_types_idx (product_type_id ASC),
   CONSTRAINT fk__products__product_types
     FOREIGN KEY (product_type_id)
