@@ -5,16 +5,18 @@ from config import connection
 class UsersRepository:
 
     def get_users():
-        sql_get_users = ("SELECT `*` FROM `users`")
+        sql_get_users = (
+            "SELECT id, first_name, last_name, username, email, password, INET_NTOA(ip_address) as ip_address, registration_date, activated FROM users")
 
         cursor = connection.cursor()
         cursor.execute(sql_get_users)
-        return [{
-            'id': user['id'],
-            'firstName': user['first_name'],
-            'lastName': user['last_name'],
-            'age': user['age']}
-            for user in cursor]
+        # return [{
+        #     'id': user['id'],
+        #     'firstName': user['first_name'],
+        #     'lastName': user['last_name'],
+        #     'age': user['age']}
+        #     for user in cursor]
+        return cursor.fetchall()
 
     def get_user(id):
         sql_get_user = ("SELECT `*` FROM `users` WHERE `id`=%s")
