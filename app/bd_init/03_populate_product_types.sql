@@ -1,32 +1,33 @@
 USE glo_2005;
-insert into product_types (id, name) values (1, 'Furniture');
-insert into product_types (id, name) values (2, 'Clothing');
-insert into product_types (id, name) values (3, 'Pet Supplies');
-insert into product_types (id, name) values (4, 'Footwear');
-insert into product_types (id, name) values (5, 'Pens & Stationery');
-insert into product_types (id, name) values (6, 'Bags & Wallets & Belts');
-insert into product_types (id, name) values (7, 'Home Decor & Festive Needs');
-insert into product_types (id, name) values (8, 'Automotive');
-insert into product_types (id, name) values (9, 'Tools & Hardware');
-insert into product_types (id, name) values (10, 'Sports & Fitness');
-insert into product_types (id, name) values (11, 'Home Furnishing');
-insert into product_types (id, name) values (12, 'Baby Care');
-insert into product_types (id, name) values (13, 'Mobiles & Accessories');
-insert into product_types (id, name) values (14, 'Toys & School Supplies');
-insert into product_types (id, name) values (15, 'Jewellery');
-insert into product_types (id, name) values (16, 'Kitchen & Dining');
-insert into product_types (id, name) values (17, 'Beauty and Personal Care');
-insert into product_types (id, name) values (18, 'Home & Kitchen');
-insert into product_types (id, name) values (19, 'Computers');
-insert into product_types (id, name) values (20, 'Watches');
-insert into product_types (id, name) values (21, 'Cameras & Accessories');
-insert into product_types (id, name) values (22, 'Health & Personal Care Appliances');
-insert into product_types (id, name) values (23, 'Gaming');
-insert into product_types (id, name) values (24, 'Home Improvement');
-insert into product_types (id, name) values (25, 'Automation & Robotics');
-insert into product_types (id, name) values (26, 'Sunglasses');
-insert into product_types (id, name) values (27, 'Home Entertainment');
-insert into product_types (id, name) values (28, 'Wearable Smart Devices');
-insert into product_types (id, name) values (29, 'Eyewear');
-insert into product_types (id, name) values (30, 'eBooks');
-insert into product_types (id, name) values (31, 'Household Supplies');
+insert into product_types (id, name) values 
+(1, 'Furniture'),
+(2, 'Clothing'),
+(3, 'Pet Supplies'),
+(4, 'Footwear'),
+(5, 'Pens & Stationery'),
+(6, 'Bags & Wallets & Belts'),
+(7, 'Home Decor & Festive Needs'),
+(8, 'Automotive'),
+(9, 'Tools & Hardware'),
+(10, 'Sports & Fitness'),
+(11, 'Home Furnishing'),
+(12, 'Baby Care'),
+(13, 'Mobiles & Accessories'),
+(14, 'Toys & School Supplies'),
+(15, 'Jewellery'),
+(16, 'Kitchen & Dining'),
+(17, 'Beauty and Personal Care'),
+(18, 'Home & Kitchen'),
+(19, 'Computers'),
+(20, 'Watches'),
+(21, 'Cameras & Accessories'),
+(22, 'Health & Personal Care Appliances'),
+(23, 'Gaming'),
+(24, 'Home Improvement'),
+(25, 'Automation & Robotics'),
+(26, 'Sunglasses'),
+(27, 'Home Entertainment'),
+(28, 'Wearable Smart Devices'),
+(29, 'Eyewear'),
+(30, 'eBooks'),
+(31, 'Household Supplies');
