@@ -14,7 +14,7 @@ def get_products():
     products = ProductsRepository.get_products(page, perPage)
     total_products = ProductsRepository.get_total_products()
     total_pages = ceil(total_products / perPage)
-    return jsonify(items=products, total_pages=total_pages)
+    return jsonify(products=products, total_products=total_products, total_pages=total_pages)
 
 
 def get_pagination():
