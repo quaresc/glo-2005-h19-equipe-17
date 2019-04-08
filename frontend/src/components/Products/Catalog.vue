@@ -13,7 +13,7 @@
       :per-page="perPage"
       order="is-centered"
       rounded
-      @change="getProducts"
+      v-on:update:current="getProducts"
     >
     </b-pagination>
   </section>
