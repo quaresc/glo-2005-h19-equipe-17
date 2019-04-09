@@ -1,2 +1,3 @@
 from infrastructure.users_repository import UsersRepository
 from infrastructure.products_repository import ProductsRepository
+from infrastructure.departments_repository import DepartmentsRepository

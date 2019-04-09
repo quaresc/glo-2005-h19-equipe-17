@@ -13,7 +13,17 @@ DEFAULT_RATING = 0
 def get_products():
     filters = get_filters()
     products = ProductsRepository.get_products(filters)
-    total_products = ProductsRepository.get_total_products()
+    total_products = ProductsRepository.get_total_products(filters)
+    total_pages = ceil(total_products / filters['perPage'])
+    return jsonify(products=products, total_products=total_products, total_pages=total_pages)
+
+
+@products.route("<department>", methods=["GET"])
+def get_departement_products(department):
+    filters = get_filters()
+    products = ProductsRepository.get_department_products(filters, department)
+    total_products = ProductsRepository.get_total_departments_products(
+        filters, department)
     total_pages = ceil(total_products / filters['perPage'])
     return jsonify(products=products, total_products=total_products, total_pages=total_pages)
 
