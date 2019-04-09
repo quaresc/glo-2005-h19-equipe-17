@@ -13,14 +13,23 @@
             <p class="subtitle is-6">{{ product.type }}</p>
           </div>
         </div>
-
-        <div class="content">${{ product.price }}</div>
       </div>
+      <footer class="card-footer">
+        <div class="card-footer-item">${{ product.price }}</div>
+        <div class="card-footer-item">
+          <star-rating
+            :rating="product.rating"
+            read-only
+            :show-rating="false"
+            :star-size="20"
+          />
+        </div>
+      </footer>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script>
 export default {
   props: {
     product: Object
@@ -30,9 +39,13 @@ export default {
 
 <style lang="sass" scoped>
 img
-  object-fit: contain;
+  object-fit: cover;
   cursor: pointer;
-.card 
+.card
+  display: flex
+  flex-direction: column
   &.is-fullheight
     height: 100%;
+.card-footer
+  margin-top: auto;
 </style>

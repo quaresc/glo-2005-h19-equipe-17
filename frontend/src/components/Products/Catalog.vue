@@ -1,40 +1,24 @@
 <template>
-  <section v-if="products" class="main-content columns is-fullheight">
-    <aside
-      class="menu is-2 is-narrow-mobile is-fullheight section is-hidden-mobile"
-    >
-      <p class="menu-label">
-        Filter
-      </p>
-      <ul class="menu-list">
-        <li><a>Dashboard</a></li>
-        <li><a>Customers</a></li>
-      </ul>
-      <p class="menu-label">
-        Administration
-      </p>
-      <ul class="menu-list">
-        <li><a>Invitations</a></li>
-        <li><a>Cloud Storage Environment Settings</a></li>
-        <li><a>Authentication</a></li>
-      </ul>
-
-      <b-pagination
-        :total="total"
-        :current.sync="currentPage"
-        :per-page="perPage"
-        rounded
-        simple
-        v-on:update:current="getProducts"
-      >
-      </b-pagination>
-    </aside>
+  <section v-if="products" class="section columns is-fullheight">
+    <catalog-menu :perPage.sync="perPage" v-on:update:perPage="getProducts" />
     <div class="columns is-multiline">
       <catalog-detail
         v-for="(product, index) in products"
         :product="product"
         :key="index"
       ></catalog-detail>
+      <div class="column">
+        <b-pagination
+          class="pagination"
+          :total="total"
+          :current.sync="currentPage"
+          :per-page="perPage"
+          rounded
+          order="is-centered"
+          v-on:update:current="getProducts"
+        >
+        </b-pagination>
+      </div>
     </div>
   </section>
 </template>
@@ -42,10 +26,12 @@
 <script lang="ts">
 import { HTTP } from "@/plugins/axios";
 import CatalogDetail from "@/components/Products/CatalogDetail.vue";
+import CatalogMenu from "@/components/Products/CatalogMenu.vue";
 
 export default {
   name: "Catalog",
   components: {
+    CatalogMenu,
     CatalogDetail
   },
   data() {
@@ -70,6 +56,7 @@ export default {
           this.products = response.data.products;
           this.total = response.data.total_products;
         });
+        window.scrollTo(0, 0);
       } catch (error) {
         console.error(error);
       }
@@ -78,4 +65,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.pagination {
+  clear: both;
+}
+</style>
