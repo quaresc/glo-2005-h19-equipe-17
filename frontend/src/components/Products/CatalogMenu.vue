@@ -1,7 +1,5 @@
 <template>
-  <aside
-    class="menu is-2 is-narrow-mobile is-fullheight section is-hidden-mobile"
-  >
+  <aside class="column is-one-fifth">
     <p class="menu-label">
       Filter
     </p>

@@ -1,18 +1,18 @@
 <template>
-  <section v-if="products" class="section columns is-fullheight">
+  <section class="section columns is-fullheight" style="position: relative">
     <catalog-menu
       :perPage.sync="perPage"
       v-on:update:perPage="getProducts"
       :rating.sync="rating"
       v-on:update:rating="getProducts"
     />
-    <div class="columns is-multiline">
+    <div class="columns is-multiline" v-if="products">
       <catalog-detail
         v-for="(product, index) in products"
         :product="product"
         :key="index"
       ></catalog-detail>
-      <div class="column">
+      <div class="column is-three-fifths is-offset-one-fifth">
         <b-pagination
           class="pagination"
           :total="total"
@@ -25,6 +25,7 @@
         </b-pagination>
       </div>
     </div>
+    <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
   </section>
 </template>
 
@@ -41,6 +42,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       currentPage: 1,
       perPage: 10,
       total: 0,
@@ -59,9 +61,11 @@ export default {
         rating: this.rating
       };
       try {
+        this.isLoading = true;
         await HTTP.get("/products", { params }).then(response => {
           this.products = response.data.products;
           this.total = response.data.total_products;
+          this.isLoading = false;
         });
         window.scrollTo(0, 0);
       } catch (error) {
