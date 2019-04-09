@@ -39,7 +39,7 @@ export default {
 
 <style lang="sass" scoped>
 img
-  object-fit: cover;
+  object-fit: contain;
   cursor: pointer;
 .card
   display: flex
