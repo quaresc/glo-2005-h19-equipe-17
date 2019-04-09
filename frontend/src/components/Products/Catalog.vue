@@ -62,7 +62,12 @@ export default {
       };
       try {
         this.isLoading = true;
-        await HTTP.get("/products", { params }).then(response => {
+        await HTTP.get(
+          this.$route.params.department
+            ? "/products/" + this.$route.params.department
+            : "/products",
+          { params }
+        ).then(response => {
           this.products = response.data.products;
           this.total = response.data.total_products;
           this.isLoading = false;
