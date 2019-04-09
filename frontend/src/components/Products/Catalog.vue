@@ -1,6 +1,11 @@
 <template>
   <section v-if="products" class="section columns is-fullheight">
-    <catalog-menu :perPage.sync="perPage" v-on:update:perPage="getProducts" />
+    <catalog-menu
+      :perPage.sync="perPage"
+      v-on:update:perPage="getProducts"
+      :rating.sync="rating"
+      v-on:update:rating="getProducts"
+    />
     <div class="columns is-multiline">
       <catalog-detail
         v-for="(product, index) in products"
@@ -39,6 +44,7 @@ export default {
       currentPage: 1,
       perPage: 10,
       total: 0,
+      rating: 0,
       products: null
     };
   },
@@ -49,7 +55,8 @@ export default {
     async getProducts() {
       const params = {
         page: this.currentPage,
-        perPage: this.perPage
+        perPage: this.perPage,
+        rating: this.rating
       };
       try {
         await HTTP.get("/products", { params }).then(response => {

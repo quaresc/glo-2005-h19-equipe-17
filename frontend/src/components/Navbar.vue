@@ -8,7 +8,7 @@
       <a class="navbar-item">
         <router-link :to="{ name: 'Home' }">
           <div class="is-size-2-desktop is-size-2-touch">
-            <a>BestBuy</a>
+            <a>WorstBuy</a>
           </div>
         </router-link>
       </a>

@@ -23,49 +23,48 @@
       </b-dropdown>
     </ul>
     <p class="menu-label">
-      Price
-    </p>
-    <ul class="menu-list">
-      <li><a>Under $10</a></li>
-      <li><a>$10 to $25</a></li>
-      <li><a>$25 to $50</a></li>
-      <li><a>$50 and above</a></li>
-    </ul>
-    <p class="menu-label">
       Avg. Customer Review
     </p>
     <ul class="menu-list">
-      <li>
-        <star-rating
-          :rating="4"
-          read-only
-          :show-rating="false"
-          :star-size="20"
-        />
+      <li @click="updateRating(4)">
+        <a>
+          <star-rating
+            :rating="4"
+            read-only
+            :show-rating="false"
+            :star-size="20"
+          />
+        </a>
       </li>
-      <li>
-        <star-rating
-          :rating="3"
-          read-only
-          :show-rating="false"
-          :star-size="20"
-        />
+      <li @click="updateRating(3)">
+        <a>
+          <star-rating
+            :rating="3"
+            read-only
+            :show-rating="false"
+            :star-size="20"
+          />
+        </a>
       </li>
-      <li>
-        <star-rating
-          :rating="2"
-          read-only
-          :show-rating="false"
-          :star-size="20"
-        />
+      <li @click="updateRating(2)">
+        <a>
+          <star-rating
+            :rating="2"
+            read-only
+            :show-rating="false"
+            :star-size="20"
+          />
+        </a>
       </li>
-      <li>
-        <star-rating
-          :rating="1"
-          read-only
-          :show-rating="false"
-          :star-size="20"
-        />
+      <li @click="updateRating(1)">
+        <a>
+          <star-rating
+            :rating="1"
+            read-only
+            :show-rating="false"
+            :star-size="20"
+          />
+        </a>
       </li>
     </ul>
   </aside>
@@ -76,6 +75,9 @@ export default {
   methods: {
     updatePerPage(value) {
       this.$emit("update:perPage", value);
+    },
+    updateRating(value) {
+      this.$emit("update:rating", value);
     }
   }
 };
