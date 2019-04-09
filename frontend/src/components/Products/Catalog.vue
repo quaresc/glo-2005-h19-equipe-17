@@ -64,7 +64,7 @@ export default {
         this.isLoading = true;
         await HTTP.get(
           this.$route.params.department
-            ? "/products/" + this.$route.params.department
+            ? "/products/department/" + this.$route.params.department
             : "/products",
           { params }
         ).then(response => {

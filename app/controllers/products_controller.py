@@ -18,7 +18,7 @@ def get_products():
     return jsonify(products=products, total_products=total_products, total_pages=total_pages)
 
 
-@products.route("<department>", methods=["GET"])
+@products.route("/department/<department>", methods=["GET"])
 def get_departement_products(department):
     filters = get_filters()
     products = ProductsRepository.get_department_products(filters, department)
