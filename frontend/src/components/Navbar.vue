@@ -26,40 +26,29 @@
       </a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item">
-          Home
-        </a>
-
-        <a class="navbar-item">
-          About us
-        </a>
-
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             Departments
           </a>
 
-          <div class="navbar-dropdown" v-if="departments">
-            <a
-              class="navbar-item"
-              v-for="(department, index) in departments"
-              :key="index"
-              @click="redirect(department.name)"
-              >{{ department.name }}</a
-            >
-            <hr class="navbar-divider" />
-            <a
-              class="navbar-item"
-              @click="
-                router.push({
-                  name: 'Catalog'
-                })
-              "
-            >
-              Check all products
-            </a>
+          <div v-if="departments" class="navbar-dropdown">
+            <div class="media">
+              <div class="media-content">
+                <a
+                  class="navbar-item"
+                  v-for="(department, index) in departments"
+                  :key="index"
+                  @click="redirect(department.name)"
+                  >{{ department.name }}</a
+                >
+                <hr class="navbar-divider" />
+                <a class="navbar-item" @click="redirect()">
+                  Check all products
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -106,10 +95,19 @@ export default {
         name: "Catalog",
         params: { department: department }
       });
+    },
+    redirect() {
+      this.$router.push({
+        name: "Catalog"
+      });
     }
   }
 };
 </script>
 
 <style scoped>
+.navbar-dropdown {
+  max-height: 50vh;
+  overflow-y: scroll;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-one-fifth-desktop is-one-third-tablet">
+  <div class="column is-one-fifth">
     <div class="card is-fullheight">
       <div class="card-image">
         <figure class="image is-square">

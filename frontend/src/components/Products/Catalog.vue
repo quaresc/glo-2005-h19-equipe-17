@@ -2,9 +2,10 @@
   <section class="section columns is-fullheight" style="position: relative">
     <catalog-menu
       :perPage.sync="perPage"
-      v-on:update:perPage="getProducts"
+      v-on:update:perPage="updateFilter"
       :rating.sync="rating"
-      v-on:update:rating="getProducts"
+      v-on:update:rating="updateFilter"
+      :department="department"
     />
     <div
       class="columns is-centered is-multiline"
@@ -15,7 +16,7 @@
         :product="product"
         :key="index"
       ></catalog-detail>
-      <div class="column is-three-fifths is-offset-one-fifth">
+      <div class="column is-half">
         <b-pagination
           class="pagination"
           :total="total"
@@ -29,8 +30,18 @@
       </div>
       <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
     </div>
-    <div v-else>
-      <p>No products</p>
+    <div
+      v-else-if="products && products.length === 0"
+      class="column is-centered"
+    >
+      <div class="column has-text-centered">
+        <p class="title is-1">
+          We currently have no products for this department :(
+        </p>
+        <p class="subtitle is-3">
+          Please come back in a few days !
+        </p>
+      </div>
     </div>
   </section>
 </template>
@@ -56,10 +67,21 @@ export default {
       products: null
     };
   },
+  computed: {
+    department() {
+      return this.$route.params.department
+        ? this.$route.params.department
+        : "All products";
+    }
+  },
   async mounted() {
     this.getProducts();
   },
   methods: {
+    updateFilter() {
+      this.currentPage = 1;
+      this.getProducts();
+    },
     async getProducts() {
       const params = {
         page: this.currentPage,

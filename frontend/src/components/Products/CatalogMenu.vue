@@ -1,5 +1,9 @@
 <template>
   <aside class="column is-one-fifth">
+    <p class="subtitle is-4">
+      {{ department }}
+    </p>
+    <br />
     <p class="menu-label">
       Filter
     </p>
@@ -70,6 +74,9 @@
 
 <script lang="ts">
 export default {
+  props: {
+    department: String
+  },
   methods: {
     updatePerPage(value) {
       this.$emit("update:perPage", value);
