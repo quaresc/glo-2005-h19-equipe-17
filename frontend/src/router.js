@@ -22,6 +22,11 @@ export default new Router({
             path: "/catalog/:department?",
             name: "Catalog",
             component: Catalog
+        },
+        {
+            path: "/user/:id/purchase",
+            name: "Purchase_history",
+            component: Purchase
         }
     ]
 });
