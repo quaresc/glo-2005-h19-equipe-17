@@ -1,31 +1,31 @@
 import pymysql.cursors
-from config import connection
+from config import create_connection
 
 
 class UsersRepository:
 
     def get_users():
-        sql_get_users = (
+        sql_query = (
             "SELECT id, first_name, last_name, username, email, password, INET_NTOA(ip_address) as ip_address, registration_date, activated FROM users")
-
-        cursor = connection.cursor()
-        cursor.execute(sql_get_users)
-        # return [{
-        #     'id': user['id'],
-        #     'firstName': user['first_name'],
-        #     'lastName': user['last_name'],
-        #     'age': user['age']}
-        #     for user in cursor]
-        return cursor.fetchall()
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
 
     def get_user(id):
-        sql_get_user = ("SELECT `*` FROM `users` WHERE `id`=%s")
-
-        cursor = connection.cursor()
-        cursor.execute(sql_get_user, (id))
-        user = cursor.fetchone()
-        if not user:
-            return None
-        return {'firstName': user['first_name'],
-                'lastName': user['last_name'],
-                'age': user['age']}
+        sql_query = ("SELECT `*` FROM `users` WHERE `id`=%s")
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query, (id))
+            user = cursor.fetchone()
+            if not user:
+                return None
+            return {'firstName': user['first_name'],
+                    'lastName': user['last_name'],
+                    'age': user['age']}
+        finally:
+            connection.close()

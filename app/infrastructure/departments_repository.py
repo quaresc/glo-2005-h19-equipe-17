@@ -1,5 +1,5 @@
 import pymysql.cursors
-from config import connection
+from config import create_connection
 
 PRODUCTS_TYPES_TABLE = "product_types"
 
@@ -12,6 +12,10 @@ class DepartmentsRepository:
             SELECT name
             FROM {PRODUCTS_TYPES_TABLE}
             """)
-        cursor = connection.cursor()
-        cursor.execute(sql_query)
-        return cursor.fetchall()
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            return cursor.fetchall()
+        finally:
+            connection.close()

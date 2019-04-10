@@ -20,7 +20,7 @@ export default new Router({
         },
         {
             path: "/catalog/:department?",
-            name: "catalog",
+            name: "Catalog",
             component: Catalog
         }
     ]

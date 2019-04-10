@@ -41,18 +41,23 @@
             Departments
           </a>
 
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Electronics
-            </a>
-            <a class="navbar-item">
-              Computers
-            </a>
-            <a class="navbar-item">
-              Beauty & Personal Care
-            </a>
+          <div class="navbar-dropdown" v-if="departments">
+            <a
+              class="navbar-item"
+              v-for="(department, index) in departments"
+              :key="index"
+              @click="redirect(department.name)"
+              >{{ department.name }}</a
+            >
             <hr class="navbar-divider" />
-            <a class="navbar-item">
+            <a
+              class="navbar-item"
+              @click="
+                router.push({
+                  name: 'Catalog'
+                })
+              "
+            >
               Check all products
             </a>
           </div>
@@ -76,7 +81,34 @@
 </template>
 
 <script>
-export default {};
+import { HTTP } from "@/plugins/axios";
+export default {
+  data() {
+    return {
+      departments: null
+    };
+  },
+  async mounted() {
+    this.getDepartements();
+  },
+  methods: {
+    async getDepartements() {
+      try {
+        await HTTP.get("/departments/").then(response => {
+          this.departments = response.data.departments;
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    redirect(department) {
+      this.$router.push({
+        name: "Catalog",
+        params: { department: department }
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>

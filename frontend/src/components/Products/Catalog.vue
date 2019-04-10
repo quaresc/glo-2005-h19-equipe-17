@@ -6,7 +6,10 @@
       :rating.sync="rating"
       v-on:update:rating="getProducts"
     />
-    <div class="columns is-multiline" v-if="products">
+    <div
+      class="columns is-centered is-multiline"
+      v-if="products && products.length !== 0"
+    >
       <catalog-detail
         v-for="(product, index) in products"
         :product="product"
@@ -24,8 +27,11 @@
         >
         </b-pagination>
       </div>
+      <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
     </div>
-    <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
+    <div v-else>
+      <p>No products</p>
+    </div>
   </section>
 </template>
 

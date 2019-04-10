@@ -1,5 +1,5 @@
 import pymysql.cursors
-from config import connection
+from config import create_connection
 
 PRODUCTS_TABLE = "products"
 PRODUCTS_TYPES_TABLE = "product_types"
@@ -17,9 +17,13 @@ class ProductsRepository:
             WHERE p.rating >= {filters['rating']}
             ORDER BY p.id LIMIT {offset}, {filters['perPage']}
             """)
-        cursor = connection.cursor()
-        cursor.execute(sql_query)
-        return cursor.fetchall()
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
 
     def get_department_products(filters, department):
         offset = (filters['page'] - 1) * filters['perPage']
@@ -32,9 +36,13 @@ class ProductsRepository:
             AND pt.name = '{department}'
             ORDER BY p.id LIMIT {offset}, {filters['perPage']}
             """)
-        cursor = connection.cursor()
-        cursor.execute(sql_query)
-        return cursor.fetchall()
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            return cursor.fetchall()
+        finally:
+            connection.close()
 
     def get_total_products(filters):
         sql_query = (
@@ -43,9 +51,13 @@ class ProductsRepository:
             FROM products AS p
             WHERE p.rating >= {filters['rating']}
             """)
-        cursor = connection.cursor()
-        cursor.execute(sql_query)
-        return int(cursor.fetchone()["total"])
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            return int(cursor.fetchone()["total"])
+        finally:
+            connection.close()
 
     def get_total_departments_products(filters, department):
         sql_query = (
@@ -56,6 +68,10 @@ class ProductsRepository:
             WHERE p.rating >= {filters['rating']}
             AND pt.name = '{department}'
             """)
-        cursor = connection.cursor()
-        cursor.execute(sql_query)
-        return int(cursor.fetchone()["total"])
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            return int(cursor.fetchone()["total"])
+        finally:
+            connection.close()
