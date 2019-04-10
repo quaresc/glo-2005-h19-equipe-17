@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-one-fifth">
+  <div class="column is-one-fifth-desktop is-two-thirds-tablet">
     <div class="card is-fullheight">
       <div class="card-image">
         <figure class="image is-square">
@@ -21,7 +21,7 @@
             :rating="product.rating"
             read-only
             :show-rating="false"
-            :star-size="20"
+            :star-size="17"
           />
         </div>
       </footer>
