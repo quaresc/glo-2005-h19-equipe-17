@@ -91,15 +91,16 @@ export default {
       }
     },
     redirect(department) {
-      this.$router.push({
-        name: "Catalog",
-        params: { department: department }
-      });
-    },
-    redirect() {
-      this.$router.push({
-        name: "Catalog"
-      });
+      if (department) {
+        this.$router.push({
+          name: "Catalog",
+          params: { department: department }
+        });
+      } else {
+        this.$router.push({
+          name: "Catalog"
+        });
+      }
     }
   }
 };
