@@ -25,7 +25,7 @@ export default new Router({
             component: Catalog
         },
         {
-            path: "/users/:id/invoice",
+            path: "/users/:id/invoices",
             name: "Invoice",
             component: Invoice
         }

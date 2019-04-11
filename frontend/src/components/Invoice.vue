@@ -26,8 +26,7 @@ export default {
   },
   async mounted() {
     try {
-      this.invoice = await HTTP.get("/users/10/invoice").then(response => {
-      console.log(response.data);
+      this.invoice = await HTTP.get("/users/1/invoices").then(response => {
         return response.data;
       });
     } catch (error) {

@@ -17,7 +17,7 @@ def get_user(id):
         return jsonify(message=f"User '{id}' does not exist."), 400
     return jsonify(user)
 
-@users.route("/<id>/invoice", methods=["GET"])
+@users.route("/<id>/invoices", methods=["GET"])
 def get_invoice(id):
     invoice =  UsersRepository.get_invoice(id)
     if not invoice:

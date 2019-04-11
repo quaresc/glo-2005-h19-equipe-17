@@ -30,7 +30,7 @@ class UsersRepository:
             connection.close()
 
     def get_invoice(id):
-        sql_query = ("SELECT * FROM invoices WHERE id=%s")
+        sql_query = ("SELECT * FROM invoices WHERE user_id=%s order by transaction_date DESC")
         try:
             connection = create_connection()
             cursor = connection.cursor()
