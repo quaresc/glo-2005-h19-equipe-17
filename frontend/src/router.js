@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/views/Home.vue";
+import Invoice from "@/views/Invoice.vue";
 import NotFound from "@/views/NotFound.vue";
 import Catalog from "@/components/Products/Catalog.vue";
 
@@ -24,9 +25,9 @@ export default new Router({
             component: Catalog
         },
         {
-            path: "/user/:id/purchase",
-            name: "Purchase_history",
-            component: Purchase
+            path: "/users/:id/invoice",
+            name: "Invoice",
+            component: Invoice
         }
     ]
 });
