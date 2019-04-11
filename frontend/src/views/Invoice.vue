@@ -1,5 +1,16 @@
 <template>
   <div class="invoice">
-    <h1>test</h1>
+    <catalog />
   </div>
 </template>
+
+<script>
+import Invoice from "@/components/Invoice.vue";
+
+export default {
+  name: "invoice",
+  components: {
+    Invoice
+  }
+};
+</script>
