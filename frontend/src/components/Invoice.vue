@@ -6,7 +6,7 @@
 import { HTTP } from "@/plugins/axios";
 
 export default {
-  name: "Invoice",
+  name: "invoice",
   data() {
     return {
       invoice: null,
@@ -18,17 +18,8 @@ export default {
           numeric: true
         },
         {
-          field: "firstName",
-          label: "First Name"
-        },
-        {
-          field: "lastName",
-          label: "Last Name"
-        },
-        {
-          field: "age",
-          label: "Age",
-          numeric: true
+          field: "at",
+          label: "date"
         }
       ]
     };
@@ -36,6 +27,7 @@ export default {
   async mounted() {
     try {
       this.invoice = await HTTP.get("/users/10/invoice").then(response => {
+      console.log(response.data);
         return response.data;
       });
     } catch (error) {

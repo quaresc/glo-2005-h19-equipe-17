@@ -1,6 +1,6 @@
 <template>
   <div class="invoice">
-    <catalog />
+    <Invoice />
   </div>
 </template>
 
