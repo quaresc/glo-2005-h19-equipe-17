@@ -16,7 +16,7 @@ class UsersRepository:
             connection.close()
 
     def get_user(id):
-        sql_query = ("SELECT `*` FROM `users` WHERE `id`=%s")
+        sql_query = ("SELECT * FROM users WHERE id=%s")
         try:
             connection = create_connection()
             cursor = connection.cursor()
@@ -25,13 +25,12 @@ class UsersRepository:
             if not user:
                 return None
             return {'firstName': user['first_name'],
-                    'lastName': user['last_name'],
-                    'age': user['age']}
+                    'lastName': user['last_name']}
         finally:
             connection.close()
 
     def get_invoice(id):
-        sql_query = ("SELECT `*` FROM `invoices` WHERE `id`=%s")
+        sql_query = ("SELECT * FROM invoices WHERE id=%s")
         try:
             connection = create_connection()
             cursor = connection.cursor()
@@ -39,7 +38,6 @@ class UsersRepository:
             invoice = cursor.fetchone()
             if not invoice:
                 return None
-            return {'id': invoice['id'],
-                    'at': invoice['transaction_date']}
+            return {'id': invoice['id'],'at': invoice['transaction_date']}
         finally:
             connection.close()
