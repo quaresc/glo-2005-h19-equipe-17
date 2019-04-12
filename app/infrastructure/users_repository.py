@@ -41,3 +41,16 @@ class UsersRepository:
             return {'id': invoice['id'],'at': invoice['transaction_date']}
         finally:
             connection.close()
+
+    def get_invoiceById(id):
+        sql_query = ("SELECT * FROM invoices WHERE id=%s")
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query, (id))
+            invoice = cursor.fetchone()
+            if not invoice:
+                return None
+            return {'id': invoice['id'],'at': invoice['transaction_date']}
+        finally:
+            connection.close()
