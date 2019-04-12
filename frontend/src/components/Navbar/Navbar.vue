@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-
+      <searchbar class="navbar-item"></searchbar>
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
@@ -71,11 +71,16 @@
 
 <script>
 import { HTTP } from "@/plugins/axios";
+import Searchbar from "@/components/Navbar/Searchbar.vue";
+
 export default {
   data() {
     return {
       departments: null
     };
+  },
+  components: {
+    Searchbar
   },
   async mounted() {
     this.getDepartements();
