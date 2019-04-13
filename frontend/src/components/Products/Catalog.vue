@@ -69,6 +69,9 @@ export default {
   },
   computed: {
     department() {
+      if (this.$route.query.search) {
+        return `Results for '${this.$route.query.search}'`;
+      }
       return this.$route.params.department
         ? this.$route.params.department
         : "All products";
@@ -88,6 +91,9 @@ export default {
         perPage: this.perPage,
         rating: this.rating
       };
+      if (this.$route.query.search) {
+        Object.assign(params, { search: this.$route.query.search });
+      }
       try {
         this.isLoading = true;
         await HTTP.get(
