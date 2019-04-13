@@ -18,7 +18,7 @@
           :per-page="perPage"
           rounded
           order="is-centered"
-          v-on:update:current="getReviews"
+          v-on:update:current="updateReviews"
         >
         </b-pagination>
       </div>
@@ -50,6 +50,10 @@ export default {
     this.getReviews();
   },
   methods: {
+    updateReviews() {
+      document.getElementById("reviews").scrollIntoView();
+      this.getReviews();
+    },
     async getReviews() {
       const params = {
         page: this.currentPage,
@@ -64,7 +68,6 @@ export default {
             this.isLoading = false;
           }
         );
-        document.getElementById("reviews").scrollIntoView();
       } catch (error) {
         console.error(error);
       }
