@@ -46,3 +46,41 @@ def get_filters():
         "search": search
     }
     return filters
+
+
+@products.route("/<id>", methods=["GET"])
+def get_product(id):
+    product = ProductsRepository.get_product(id)
+    return jsonify(product=product)
+
+
+@products.route("/<id>/reviews", methods=["GET"])
+def get_product_reviews(id):
+    filters = get_filters()
+    product_reviews = ProductsRepository.get_product_reviews(id, filters)
+    total_product_reviews = ProductsRepository.get_total_product_reviews(id)
+    total_pages = ceil(total_product_reviews / filters['perPage'])
+    return jsonify(product_reviews=product_reviews, total_product_reviews=total_product_reviews, total_pages=total_pages)
+
+
+@products.route("/<productId>/reviews/<userId>", methods=["PUT"])
+def add_product_review(productId, userId):
+    review = get_review()
+    try:
+        ProductsRepository.add_product_review(productId, userId, review)
+        return "Ok"
+    except Exception:
+        return "Duplicate"
+
+
+def get_review():
+    request_data = request.get_json()
+    title = request_data['review']['title']
+    comment = request_data['review']['comment']
+    rating = request_data['review']['rating']
+    review = {
+        "title": title,
+        "comment": comment,
+        "rating": rating
+    }
+    return review
