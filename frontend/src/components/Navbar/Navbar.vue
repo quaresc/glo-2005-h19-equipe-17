@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar is-fixed-top"
+    class="navbar is-fixed-top is-secondary"
     role="navigation"
     aria-label="main navigation"
   >
@@ -8,7 +8,7 @@
       <a class="navbar-item">
         <router-link :to="{ name: 'Home' }">
           <div class="is-size-2-desktop is-size-2-touch">
-            <a>WorstBuy</a>
+            <a id="brand">WorstBuy</a>
           </div>
         </router-link>
       </a>
@@ -30,9 +30,8 @@
       <div class="navbar-start">
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
-            Departments
+            <strong>Departments</strong>
           </a>
-
           <div v-if="departments" class="navbar-dropdown">
             <div class="media">
               <div class="media-content">
@@ -56,11 +55,9 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light">
-              Log in
+            <a class="button is-secondary">
+              <b-icon icon="shopping-cart" size="is-small"> </b-icon>
+              <strong>Cart</strong>
             </a>
           </div>
         </div>
@@ -112,8 +109,14 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+  height: 4.1rem;
+}
 .navbar-dropdown {
   max-height: 50vh;
   overflow-y: scroll;
+}
+#brand {
+  font-family: "Alfa Slab One", cursive;
 }
 </style>

@@ -30,7 +30,8 @@
           </div>
           <br />
           <button
-            class="button is-primary is-rounded  is-fullwidth"
+            class="button is-primary is-rounded is-fullwidth"
+            :disabled="added === true"
             @click="addToCart()"
           >
             Add to cart
@@ -52,7 +53,8 @@ export default {
   },
   data() {
     return {
-      product: null
+      product: null,
+      added: false
     };
   },
   async mounted() {
@@ -85,8 +87,10 @@ export default {
             } else {
               this.$toast.open({
                 message: "You added this product to your cart!",
+                position: "is-bottom",
                 type: "is-success"
               });
+              this.added = true;
             }
           }
         );

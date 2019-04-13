@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar></navbar>
-    <router-view :key="$route.fullPath"/>
+    <router-view :key="$route.fullPath" />
   </div>
 </template>
 
@@ -21,12 +21,12 @@ export default {
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: #336669;
+$primary: #ff715b;
 $primary-invert: findColorInvert($primary);
-$twitter: #4099ff;
-$twitter-invert: findColorInvert($twitter);
+$secondary: #f2efea;
+$secondary-invert: findColorInvert($secondary);
 
-// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+// Setup $colors to use as bulma classes (e.g. 'is-secondary')
 $colors: (
   "white": (
     $white,
@@ -64,9 +64,9 @@ $colors: (
     $danger,
     $danger-invert
   ),
-  "twitter": (
-    $twitter,
-    $twitter-invert
+  "secondary": (
+    $secondary,
+    $secondary-invert
   )
 );
 
