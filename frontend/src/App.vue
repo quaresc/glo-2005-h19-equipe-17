@@ -21,9 +21,9 @@ export default {
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: #ff715b;
+$primary: #fcbd69;
 $primary-invert: findColorInvert($primary);
-$secondary: #f2efea;
+$secondary: #222f3e;
 $secondary-invert: findColorInvert($secondary);
 
 // Setup $colors to use as bulma classes (e.g. 'is-secondary')
