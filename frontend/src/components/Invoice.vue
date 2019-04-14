@@ -1,7 +1,9 @@
 <template>
   <div class="data-invoice container">
-    <p> Liste des factures pour : {{username.username}} </p>
+    <p> Liste des factures pour l'utilisateur  {{username.username}} </p>
     <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table>
+
+
   </div>
 </template>
 
@@ -14,7 +16,6 @@ export default {
     return {
       username: null,
       invoice: null,
-
       columns: [
         {
           field: "id_invoice",
