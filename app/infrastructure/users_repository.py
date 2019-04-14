@@ -61,7 +61,7 @@ class UsersRepository:
     def get_cart(userId):
         sql_query = (
             f"""
-            SELECT p.name, p.rating, p.image_url, c.quantity AS type
+            SELECT p.name, p.rating, p.image_url, c.quantity AS quantity
             FROM {PRODUCTS_TABLE} AS p INNER JOIN {CARTS_TABLE} AS c ON
             p.id=c.product_id;
             """)
