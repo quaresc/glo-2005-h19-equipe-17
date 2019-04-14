@@ -35,3 +35,9 @@ def get_cart_quantity():
         "quantity": quantity,
     }
     return cart
+
+
+@users.route("/<userId>/cart", methods=["GET"])
+def get_cart(userId):
+    products = UsersRepository.get_cart(userId)
+    return jsonify(products=products)

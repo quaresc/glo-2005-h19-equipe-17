@@ -4,6 +4,7 @@ from config import create_connection
 
 USERS_TABLE = "users"
 CARTS_TABLE = "carts"
+PRODUCTS_TABLE = "products"
 
 
 class UsersRepository:
@@ -54,5 +55,20 @@ class UsersRepository:
             return "Ok"
         except pymysql.err.IntegrityError:
             raise Exception('Duplicate')
+        finally:
+            connection.close()
+
+    def get_cart(userId):
+        sql_query = (
+            f"""
+            SELECT p.name, p.rating, p.image_url, c.quantity AS quantity
+            FROM {PRODUCTS_TABLE} AS p INNER JOIN {CARTS_TABLE} AS c ON
+            p.id=c.product_id;
+            """)
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            return cursor.fetchall()
         finally:
             connection.close()

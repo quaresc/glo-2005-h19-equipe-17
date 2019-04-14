@@ -78,7 +78,7 @@ export default {
     }
   },
   async mounted() {
-    this.getProducts();
+    await this.getProducts();
   },
   methods: {
     updateFilter() {

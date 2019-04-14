@@ -44,7 +44,6 @@ export default {
       comment: null
     };
   },
-  async mounted() {},
   methods: {
     setRating: function(rating) {
       this.rating = rating;

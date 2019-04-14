@@ -47,7 +47,7 @@ export default {
     };
   },
   async mounted() {
-    this.getReviews();
+    await this.getReviews();
   },
   methods: {
     updateReviews() {
