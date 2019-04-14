@@ -40,14 +40,11 @@ class UsersRepository:
             connection.close()
 
     def get_invoiceById(id):
-        sql_query = ("SELECT * FROM invoices WHERE id=%s")
+        sql_query = ("select i.transaction_date, ip.invoice_id, p.name, ip.quantity, p.price from invoice_products as ip, products as p, invoices as i where invoice_id = %s and ip.product_id = p.id and ip.invoice_id = i.id;")
         try:
             connection = create_connection()
             cursor = connection.cursor()
             cursor.execute(sql_query, (id))
-            invoice = cursor.fetchone()
-            if not invoice:
-                return None
-            return {'id': invoice['id'],'at': invoice['transaction_date']}
+            return cursor.fetchall()
         finally:
             connection.close()
