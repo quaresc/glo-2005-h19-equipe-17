@@ -73,6 +73,7 @@ DROP TABLE IF EXISTS carts;
 CREATE TABLE IF NOT EXISTS carts (
   user_id INT NOT NULL,
   product_id INT NOT NULL,
+  quantity INT NOT NULL,
   INDEX fk__carts__users_idx (user_id ASC),
   INDEX fk__carts__products_idx (product_id ASC),
   UNIQUE INDEX `user_id__product_id__UNIQUE` (`user_id` ASC, `product_id` ASC),
