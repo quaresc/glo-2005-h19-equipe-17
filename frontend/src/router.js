@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/views/Home.vue";
 import Invoice from "@/views/Invoice.vue";
+import InvoiceRetail from "@/views/InvoiceRetail.vue";
 import NotFound from "@/views/NotFound.vue";
 import Catalog from "@/components/Products/Catalog.vue";
 
@@ -28,6 +29,11 @@ export default new Router({
             path: "/users/:id/invoices",
             name: "Invoice",
             component: Invoice
+        },
+        {
+            path: "/users/invoice/:id",
+            name: "InvoiceRetail",
+            component: InvoiceRetail
         }
     ]
 });
