@@ -54,11 +54,12 @@ export default {
   data() {
     return {
       product: null,
-      added: false
+      added: false,
+      defaultQuantity: 1
     };
   },
   async mounted() {
-    this.getProduct();
+    await this.getProduct();
   },
   methods: {
     async getProduct() {
@@ -74,26 +75,28 @@ export default {
     async addToCart() {
       let productId = this.$route.params.id;
       let userId = 1; // TODO: Replace with a real variable
+      const cart = {
+        quantity: this.defaultQuantity
+      };
       try {
-        await HTTP.post("/users/" + userId + "/cart/" + productId).then(
-          response => {
-            if (response.data === "Duplicate") {
-              this.$toast.open({
-                duration: 5000,
-                message: "You already added this product to your cart.",
-                position: "is-bottom",
-                type: "is-danger"
-              });
-            } else {
-              this.$toast.open({
-                message: "You added this product to your cart!",
-                position: "is-bottom",
-                type: "is-success"
-              });
-              this.added = true;
-            }
+        await HTTP.post("/users/" + userId + "/cart/" + productId, {
+          cart
+        }).then(response => {
+          if (response.data === "Duplicate") {
+            this.$toast.open({
+              duration: 5000,
+              message: "You already added this product to your cart.",
+              position: "is-bottom",
+              type: "is-danger"
+            });
+          } else {
+            this.$toast.open({
+              message: "You added this product to your cart!",
+              type: "is-success",
+              position: "is-bottom"
+            });
           }
-        );
+        });
       } catch (error) {
         console.error(error);
       }

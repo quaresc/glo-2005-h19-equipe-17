@@ -8,7 +8,7 @@
       <a class="navbar-item">
         <router-link :to="{ name: 'Home' }">
           <div class="is-size-2-desktop is-size-2-touch">
-            <a id="brand">WorstBuy</a>
+            <p id="brand">WorstBuy</p>
           </div>
         </router-link>
       </a>
@@ -55,10 +55,12 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-secondary">
-              <b-icon icon="shopping-cart" size="is-small"> </b-icon>
-              <strong>Cart</strong>
-            </a>
+            <router-link :to="{ name: 'Cart' }">
+              <button class="button is-secondary">
+                <b-icon icon="shopping-cart" size="is-small"> </b-icon>
+                <strong>Cart</strong>
+              </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -80,7 +82,7 @@ export default {
     Searchbar
   },
   async mounted() {
-    this.getDepartements();
+    await this.getDepartements();
   },
   methods: {
     async getDepartements() {
@@ -109,6 +111,9 @@ export default {
 </script>
 
 <style scoped>
+[data-badge]::after {
+  background: #ff9508 !important;
+}
 .navbar {
   height: 4.1rem;
 }
