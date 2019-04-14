@@ -1,31 +1,10 @@
 <template>
-  <section class="section columns">
-    <div class="tile is-ancestor">
+  <section class="section is-centered columns">
+    <div v-if="cart.length > 0" class="tile is-ancestor">
       <div class="tile is-parent is-vertical is-8">
         <article class="tile is-child notification">
           <p class="title">Shopping cart</p>
-          <div class="card" v-for="product in cart" :key="product.id">
-            <div class="card-content">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img :src="product.image_url" />
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="title is-6">{{ product.name }}</p>
-                  <p class="subtitle is-6">{{ product.type }}</p>
-                  <p class="subtitle is-6">${{ product.price }}</p>
-                  <star-rating
-                    :rating="product.rating"
-                    read-only
-                    :show-rating="false"
-                    :star-size="17"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <cart-list :cart="cart" />
         </article>
       </div>
       <div class="tile is-parent">
@@ -40,17 +19,32 @@
         </article>
       </div>
     </div>
+    <div v-else class="columns section">
+      <div class="column has-text-centered">
+        <p class="title is-1">Your cart is currently empty !</p>
+        <p class="subtitle is-3">
+          Find some inspiration in our catalog
+        </p>
+        <router-link :to="{ name: 'Home' }">
+          <a class="button is-primary is-large">Back to home</a>
+        </router-link>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 import { HTTP } from "@/plugins/axios";
+import CartList from "@/components/Cart/CartList.vue";
 
 export default {
   data() {
     return {
-      cart: {}
+      cart: []
     };
+  },
+  components: {
+    CartList
   },
   async mounted() {
     await this.getCart();
