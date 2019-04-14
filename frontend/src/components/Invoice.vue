@@ -23,7 +23,7 @@ export default {
         },
         {
           field: "montant",
-          label: "Somme total (euros)"
+          label: "Somme total $"
         },
         {
           field: "transaction_date",
@@ -33,7 +33,8 @@ export default {
     };
   },
   created() {
-          this.id = this.$route.params.id;
+          //this.id = this.$route.params.id;
+          this.id =1 
       },
   async mounted() {
     try {
