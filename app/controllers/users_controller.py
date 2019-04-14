@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from infrastructure import UsersRepository
 
 users = Blueprint('users', __name__)
@@ -17,6 +17,7 @@ def get_user(id):
         return jsonify(message=f"User '{id}' does not exist."), 400
     return jsonify(user)
 
+
 @users.route("/<id>/invoices", methods=["GET"])
 def get_invoice(id):
     invoice =  UsersRepository.get_invoice(id)
@@ -30,3 +31,27 @@ def get_invoiceById(id):
     if not invoice:
         return jsonify(message=f"Invoice '{id}' does not exist."), 400
     return jsonify(invoice)
+
+@users.route("/<userId>/cart/<productId>", methods=["POST"])
+def add_product_to_cart(userId, productId):
+    cart = get_cart_quantity()
+    try:
+        UsersRepository.add_product_to_cart(userId, productId, cart)
+        return "Ok"
+    except Exception:
+        return "Duplicate"
+
+
+def get_cart_quantity():
+    request_data = request.get_json()
+    quantity = request_data['cart']['quantity']
+    cart = {
+        "quantity": quantity,
+    }
+    return cart
+
+
+@users.route("/<userId>/cart", methods=["GET"])
+def get_cart(userId):
+    products = UsersRepository.get_cart(userId)
+    return jsonify(products=products)

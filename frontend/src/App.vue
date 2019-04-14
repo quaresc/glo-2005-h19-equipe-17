@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
+import Navbar from "@/components/Navbar/Navbar.vue";
 
 export default {
   components: {
@@ -21,12 +21,12 @@ export default {
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: #336669;
+$primary: #fcbd69;
 $primary-invert: findColorInvert($primary);
-$twitter: #4099ff;
-$twitter-invert: findColorInvert($twitter);
+$secondary: #222f3e;
+$secondary-invert: findColorInvert($secondary);
 
-// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+// Setup $colors to use as bulma classes (e.g. 'is-secondary')
 $colors: (
   "white": (
     $white,
@@ -64,9 +64,9 @@ $colors: (
     $danger,
     $danger-invert
   ),
-  "twitter": (
-    $twitter,
-    $twitter-invert
+  "secondary": (
+    $secondary,
+    $secondary-invert
   )
 );
 
