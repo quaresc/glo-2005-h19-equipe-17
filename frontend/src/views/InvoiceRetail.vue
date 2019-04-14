@@ -1,5 +1,17 @@
 <template>
   <div class="invoice">
-    tototto
+    <InvoiceRetail />
   </div>
 </template>
+
+
+<script>
+import InvoiceRetail from "@/components/InvoiceRetail.vue";
+
+export default {
+  name: "invoiceretail",
+  components: {
+    InvoiceRetail
+  }
+};
+</script>
