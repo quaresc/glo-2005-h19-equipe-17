@@ -41,3 +41,12 @@ def get_cart_quantity():
 def get_cart(userId):
     products = UsersRepository.get_cart(userId)
     return jsonify(products=products)
+
+
+@users.route("/<userId>/cart/<productId>", methods=["PATCH"])
+def update_cart_quantity(userId, productId):
+    request_data = request.get_json()
+    quantity = request_data['quantity']
+    if quantity is not None:
+        UsersRepository.update_cart_quantity(userId, productId, quantity)
+    return '', 204
