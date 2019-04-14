@@ -1,5 +1,6 @@
 <template>
   <div class="data-invoice container">
+    <p> Liste des factures pour : {{username.username}} </p>
     <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table>
   </div>
 </template>
@@ -11,7 +12,9 @@ export default {
   name: "invoice",
   data() {
     return {
+      username: null,
       invoice: null,
+
       columns: [
         {
           field: "id_invoice",
@@ -34,6 +37,9 @@ export default {
   async mounted() {
     try {
       this.invoice = await HTTP.get("/users/"+ this.id + "/invoices").then(response => {
+        return response.data;
+      });
+      this.username = await HTTP.get("/users/"+ this.id).then(response => {
         return response.data;
       });
     } catch (error) {

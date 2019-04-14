@@ -25,7 +25,7 @@ class UsersRepository:
             if not user:
                 return None
             return {'firstName': user['first_name'],
-                    'lastName': user['last_name']}
+                    'lastName': user['last_name'], 'username' : user['username']}
         finally:
             connection.close()
 
