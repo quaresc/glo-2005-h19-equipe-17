@@ -3,7 +3,7 @@
     <div class="tile">
       <div class="tile is-5 is-parent is-vertical">
         <figure class="image is-square">
-          <img :src="product.image_url" />
+          <img :src="product.image_url">
         </figure>
       </div>
       <div class="tile is-parent is-vertical">
@@ -11,34 +11,20 @@
           <div class="media">
             <div class="media-content">
               <p class="title is-4">{{ product.name }}</p>
-              <p class="subtitle is-4">
-                {{ product.type }} - Seller: {{ product.company }}
-              </p>
+              <p class="subtitle is-4">{{ product.type }} - Seller: {{ product.company }}</p>
               <div class="subtitle is-6">{{ product.ean }}</div>
-              <star-rating
-                :rating="product.rating"
-                read-only
-                :show-rating="false"
-                :star-size="20"
-              />
+              <star-rating :rating="product.rating" read-only :show-rating="false" :star-size="20"/>
               <p class="subtitle is-6">Price: {{ product.price }}$</p>
               <p class="subtitle is-6">Weight: {{ product.weight }}kg</p>
-              <p class="subtitle is-6">
-                Description: {{ product.description }}
-              </p>
+              <p class="subtitle is-6">Description: {{ product.description }}</p>
             </div>
           </div>
-          <br />
-          <button
-            class="button is-primary is-rounded  is-fullwidth"
-            @click="addToCart()"
-          >
-            Add to cart
-          </button>
+          <br>
+          <button class="button is-primary is-rounded is-fullwidth" @click="addToCart()">Add to cart</button>
         </div>
       </div>
     </div>
-    <review />
+    <review/>
   </section>
 </template>
 
@@ -52,7 +38,8 @@ export default {
   },
   data() {
     return {
-      product: null
+      product: null,
+      defaultQuantity: 1
     };
   },
   async mounted() {
@@ -72,24 +59,27 @@ export default {
     async addToCart() {
       let productId = this.$route.params.id;
       let userId = 1; // TODO: Replace with a real variable
+      const cart = {
+        quantity: this.defaultQuantity
+      };
       try {
-        await HTTP.post("/users/" + userId + "/cart/" + productId).then(
-          response => {
-            if (response.data === "Duplicate") {
-              this.$toast.open({
-                duration: 5000,
-                message: "You already added this product to your cart.",
-                position: "is-bottom",
-                type: "is-danger"
-              });
-            } else {
-              this.$toast.open({
-                message: "You added this product to your cart!",
-                type: "is-success"
-              });
-            }
+        await HTTP.post("/users/" + userId + "/cart/" + productId, {
+          cart
+        }).then(response => {
+          if (response.data === "Duplicate") {
+            this.$toast.open({
+              duration: 5000,
+              message: "You already added this product to your cart.",
+              position: "is-bottom",
+              type: "is-danger"
+            });
+          } else {
+            this.$toast.open({
+              message: "You added this product to your cart!",
+              type: "is-success"
+            });
           }
-        );
+        });
       } catch (error) {
         console.error(error);
       }

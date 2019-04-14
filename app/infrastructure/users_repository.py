@@ -40,11 +40,11 @@ class UsersRepository:
         finally:
             connection.close()
 
-    def add_product_to_cart(userId, productId):
+    def add_product_to_cart(userId, productId, cart):
         sql_query = (
             f"""
-            INSERT INTO {CARTS_TABLE} (user_id, product_id)
-            VALUES({userId}, {productId})
+            INSERT INTO {CARTS_TABLE} (user_id, product_id, quantity)
+            VALUES({userId}, {productId}, {cart['quantity']})
             """)
         try:
             connection = create_connection()

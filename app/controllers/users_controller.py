@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from infrastructure import UsersRepository
 
 users = Blueprint('users', __name__)
@@ -20,8 +20,18 @@ def get_user(id):
 
 @users.route("/<userId>/cart/<productId>", methods=["POST"])
 def add_product_to_cart(userId, productId):
+    cart = get_cart_quantity()
     try:
-        UsersRepository.add_product_to_cart(userId, productId)
+        UsersRepository.add_product_to_cart(userId, productId, cart)
         return "Ok"
     except Exception:
         return "Duplicate"
+
+
+def get_cart_quantity():
+    request_data = request.get_json()
+    quantity = request_data['cart']['quantity']
+    cart = {
+        "quantity": quantity,
+    }
+    return cart
