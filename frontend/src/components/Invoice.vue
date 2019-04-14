@@ -1,5 +1,7 @@
 <template>
-  <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table>
+  <div class="data-invoice container">
+    <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table>
+  </div>
 </template>
 
 <script>
@@ -13,13 +15,15 @@ export default {
       columns: [
         {
           field: "id_invoice",
-          label: "ID",
-          width: "40",
-          numeric: true
+          label: "ID invoice",
         },
         {
           field: "montant",
-          label: "Somme total"
+          label: "Somme total (euros)"
+        },
+        {
+          field: "transaction_date",
+          label: "Date"
         }
       ]
     };
@@ -38,3 +42,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.data-invoice {
+  margin-top:80px;
+}
+</style>
