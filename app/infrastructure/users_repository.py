@@ -5,6 +5,8 @@ from config import create_connection
 USERS_TABLE = "users"
 CARTS_TABLE = "carts"
 PRODUCTS_TABLE = "products"
+INVOICES_TABLE = "invoices"
+INVOICE_PRODUCTS_TABLE = "invoice_products"
 
 
 class UsersRepository:
@@ -69,6 +71,106 @@ class UsersRepository:
             connection = create_connection()
             cursor = connection.cursor()
             cursor.execute(sql_query)
+            connection.commit()
+            return "Ok"
+        finally:
+            connection.close()
+
+    def delete_product_from_cart(userId, productId):
+        sql_query = (
+            f"""
+            DELETE FROM {CARTS_TABLE} 
+            WHERE user_id={userId} && product_id={productId}
+            """)
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            connection.commit()
+            return "Ok"
+        finally:
+            connection.close()
+
+    def delete_cart(userId):
+        sql_query = (
+            f"""
+            DELETE FROM {CARTS_TABLE} 
+            WHERE user_id={userId}
+            """)
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            connection.commit()
+            return "Ok"
+        finally:
+            connection.close()
+
+    def create_invoice(userId):
+        sql_query = (
+            f"""
+            INSERT INTO {INVOICES_TABLE} (user_id)
+            VALUES ({userId})
+            """)
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            connection.commit()
+            return "Ok"
+        finally:
+            connection.close()
+
+    def get_invoice_id(userId):
+        sql_query = (
+            f"""
+            SELECT id from {INVOICES_TABLE}
+            WHERE user_id={userId}
+            ORDER BY transaction_date DESC
+            """)
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
             return cursor.fetchall()
         finally:
             connection.close()
+
+    def create_invoice_products(userId, cart, invoiceId):
+        invoice_products_values = create_invoice_products_values_query(cart)
+        print("Result:")
+        print(invoice_products_values)
+        sql_query = (
+            f"""
+            INSERT INTO {INVOICE_PRODUCTS_TABLE} (invoice_id, product_id, quantity)
+            VALUES {invoice_products_values}
+            """)
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            connection.commit()
+            return "Ok"
+        finally:
+            connection.close()
+
+    def create_invoice_products_values_query(products):
+        invoice_products_values = ""
+        print("Products")
+        print(products['product'])
+        print("Products minus one")
+        print(products['product'][:-1])
+         for product in products['product'][:-1]:
+            print("Product")
+            print(product)
+             invoice_products_values += "("
+            invoice_products_values += product['product_id']            
+            invoice_products_values += product[', ']            
+            invoice_products_values += product['quantity']
+            invoice_products_values += "), "
+        invoice_products_values += "("
+        invoice_products_values += product['product_id']            
+        invoice_products_values += product[', ']            
+        invoice_products_values += product['quantity']
+        invoice_products_values += ")"
+        return invoice_products_values

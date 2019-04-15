@@ -21,7 +21,7 @@
                 :show-rating="false"
                 :star-size="20"
               />
-              <p class="subtitle is-6">Price: {{ product.price }}$</p>
+              <p class="subtitle is-6">Price: ${{ product.price }}</p>
               <p class="subtitle is-6">Weight: {{ product.weight }}kg</p>
               <p class="subtitle is-6">
                 Description: {{ product.description }}

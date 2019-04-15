@@ -41,3 +41,32 @@ def get_cart_quantity():
 def get_cart(userId):
     products = UsersRepository.get_cart(userId)
     return jsonify(products=products)
+
+
+@users.route("/<userId>/cart/<productId>", methods=["DELETE"])
+def delete_product_from_cart(userId, productId):
+    UsersRepository.delete_product_from_cart(userId, productId)
+    return "Ok"
+
+
+@users.route("/<userId>/cart", methods=["DELETE"])
+def delete_cart(userId):
+    UsersRepository.delete_cart(userId)
+    return "Ok"
+
+
+@users.route("/<userId>/purchase", methods=["POST"])
+def submit_cart(userId):
+    UsersRepository.create_invoice(userId)
+    invoiceId = UsersRepository.get_invoice_id(userId)
+    products = get_cart_info()
+    UsersRepository.create_invoice_products(userId, products, invoiceId)
+    return "Ok"
+
+def get_cart_info():
+    request_data = request.get_json()
+    products = request_data['cart']['products']
+    cart = {
+        "products": products,
+    }
+    return cart
