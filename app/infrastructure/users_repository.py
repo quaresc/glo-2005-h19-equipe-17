@@ -176,18 +176,18 @@ class UsersRepository:
         print("Products")
         print(products['product'])
         print("Products minus one")
-        print(products['product'][:-1])
-         for product in products['product'][:-1]:
+        print(products['product':-1])
+        for product in products['product':-1]:
             print("Product")
             print(product)
-             invoice_products_values += "("
-            invoice_products_values += product['product_id']            
-            invoice_products_values += product[', ']            
+            invoice_products_values += "("
+            invoice_products_values += product['product_id']
+            invoice_products_values += product[', ']
             invoice_products_values += product['quantity']
             invoice_products_values += "), "
         invoice_products_values += "("
-        invoice_products_values += product['product_id']            
-        invoice_products_values += product[', ']            
+        invoice_products_values += product['product_id']
+        invoice_products_values += product[', ']
         invoice_products_values += product['quantity']
         invoice_products_values += ")"
         return invoice_products_values
