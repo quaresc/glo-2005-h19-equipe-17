@@ -31,11 +31,14 @@
           <br />
           <button
             class="button is-primary is-rounded is-fullwidth"
-            :disabled="added === true"
+            :disabled="added === true || product.quantity === 0"
             @click="addToCart()"
           >
             Add to cart
           </button>
+          <p v-if="product.quantity === 0" class="subtitle has-text-centered is-6">
+            This product is currently out of stock
+          </p>
         </div>
       </div>
     </div>
