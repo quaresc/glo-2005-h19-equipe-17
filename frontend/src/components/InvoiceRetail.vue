@@ -1,6 +1,14 @@
 <template>
   <div class="data-invoice container">
     <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table>
+
+    <div class="buttons">
+      <router-link :to="{ name: 'Invoice' }">
+        <button class="button is-secondary">
+          <strong>List Invoices</strong>
+        </button>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -15,15 +23,15 @@ export default {
       columns: [
         {
           field: "name",
-          label: "Nom de l'article",
+          label: "Product name",
         },
         {
           field: "price",
-          label: "prix"
+          label: "Price"
         },
         {
           field: "quantity",
-          label: "Quantité"
+          label: "Quantity"
         }
       ]
     };
@@ -45,6 +53,6 @@ export default {
 
 <style scoped>
 .data-invoice {
-  margin-top:80px;
+  margin-top:60px;
 }
 </style>

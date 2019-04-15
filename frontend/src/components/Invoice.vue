@@ -1,7 +1,32 @@
 <template>
   <div class="data-invoice container">
-    <p> Liste des factures pour l'utilisateur  {{username.username}} </p>
-    <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table>
+    <p> All invoice for  {{username.username}} </p>
+
+
+    <template>
+        <div class="table-responsive">
+            <table class="table-hover" v-if="invoice">
+                <thead>
+                    <tr>
+                        <th>Id invoice</th>
+                        <th>Amount $</th>
+                        <th>Date </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(item, idx) in invoice">
+                        <router-link :to="{ name: 'InvoiceRetail', params: { id: item.id_invoice }}">item.id_invoice</router-link>
+                        <td>{{ item.montant }}</td>
+                        <td>{{ item.transaction_date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+
+      <!--  <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table> -->
 
 
   </div>
@@ -34,7 +59,7 @@ export default {
   },
   created() {
           //this.id = this.$route.params.id;
-          this.id =1 
+          this.id = 1
       },
   async mounted() {
     try {
@@ -53,6 +78,6 @@ export default {
 
 <style scoped>
 .data-invoice {
-  margin-top:80px;
+  margin-top:60px;
 }
 </style>
