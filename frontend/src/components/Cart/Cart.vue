@@ -66,7 +66,7 @@ export default {
     async updateQuantity(productId, quantity) {
       await HTTP.patch(`/users/1/cart/${productId}`, {
         quantity: quantity
-      }).then(async response => {
+      }).then(async () => {
         return await this.getCart();
       });
     }
