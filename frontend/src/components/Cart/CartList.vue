@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <div class="card" v-for="product in cart" :key="product.id">
+  <section class="cart-list">
+    <div class="card" v-for="(product, index) in cart" :key="product.id">
       <div class="card-content">
         <div class="media">
           <div class="media-left">
@@ -9,15 +9,38 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-6">{{ product.name }}</p>
-            <p class="subtitle is-6">{{ product.type }}</p>
-            <p class="subtitle is-6">${{ product.price }}</p>
-            <star-rating
-              :rating="product.rating"
-              read-only
-              :show-rating="false"
-              :star-size="17"
-            />
+            <div class="columns is-vcentered">
+              <div class="column is-three-fifths">
+                <p class="title is-6">{{ product.name }}</p>
+                <p class="subtitle is-6">{{ product.company }}</p>
+                <star-rating
+                  :rating="product.rating"
+                  read-only
+                  :show-rating="false"
+                  :star-size="17"
+                />
+              </div>
+              <div class="column has-text-centered">
+                <p class="subtitle is-6 has-text-weight-semibold">
+                  ${{ product.price }}
+                </p>
+              </div>
+              <b-select
+                placeholder="Quantity"
+                v-model="quantity[index]"
+                @input="updateQuantity(product.id, quantity[index])"
+              >
+                <option v-for="index in 10" :value="index" :key="index">{{
+                  index
+                }}</option>
+              </b-select>
+              <button
+                class="button is-secondary"
+                @click="deleteFromCart(product.id)"
+              >
+                <b-icon icon="trash-alt" size="is-small"></b-icon>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -26,15 +49,38 @@
 </template>
 
 <script>
+import { HTTP } from "@/plugins/axios";
+
 export default {
   props: {
-    cart: Array
+    cart: Array,
+    updateQuantity: Function
+  },
+  data() {
+    return {
+      quantity: []
+    };
+  },
+  mounted() {
+    this.cart.forEach(product => {
+      this.quantity.push(product.quantity);
+    });
+  },
+  methods: {
+    async deleteFromCart(productId) {
+      await HTTP.delete("/users/1/cart/" + productId, {}).then(async () => {
+        this.$router.go();
+      });
+    }
   }
 };
 </script>
 
-<style lang="sass" scoped>
-
+<style scoped>
+.cart-list {
+  max-height: 67vh;
+  overflow-y: scroll;
+}
 </style>
 
 

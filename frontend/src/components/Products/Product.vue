@@ -21,7 +21,7 @@
                 :show-rating="false"
                 :star-size="20"
               />
-              <p class="subtitle is-6">Price: {{ product.price }}$</p>
+              <p class="subtitle is-6">Price: ${{ product.price }}</p>
               <p class="subtitle is-6">Weight: {{ product.weight }}kg</p>
               <p class="subtitle is-6">
                 Description: {{ product.description }}
@@ -31,11 +31,14 @@
           <br />
           <button
             class="button is-primary is-rounded is-fullwidth"
-            :disabled="added === true"
+            :disabled="added === true || product.quantity === 0"
             @click="addToCart()"
           >
             Add to cart
           </button>
+          <p v-if="product.quantity === 0" class="subtitle has-text-centered is-6">
+            This product is currently out of stock
+          </p>
         </div>
       </div>
     </div>
