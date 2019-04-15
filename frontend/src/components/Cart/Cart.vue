@@ -4,8 +4,11 @@
       <div class="tile is-parent is-vertical is-8">
         <article class="tile is-child notification">
           <p class="title">Shopping cart</p>
-          <cart-list :cart="cart" :updateQuantity="updateQuantity"/>
-          <button class="button is-secondary" @click="deleteCart()">Delete cart</button>
+          <cart-list :cart="cart" :updateQuantity="updateQuantity" />
+          <br />
+          <button class="button is-secondary" @click="deleteCart()">
+            Delete cart
+          </button>
         </article>
       </div>
       <div class="tile is-parent">
@@ -16,7 +19,9 @@
               <p class="subtitle is-3">${{ total }}</p>
             </div>
           </div>
-          <button class="button is-secondary" @click="submitPurchase()">Confirm purchase</button>
+          <button class="button is-primary" @click="submitPurchase()">
+            Confirm purchase
+          </button>
         </article>
       </div>
     </div>
@@ -82,7 +87,7 @@ export default {
           productId: element.id,
           quantity: element.quantity
         };
-        products.push( {product} );
+        products.push({ product });
       });
       await HTTP.post("/users/1/purchase", { products }).then(async () => {
         this.$router.go();
