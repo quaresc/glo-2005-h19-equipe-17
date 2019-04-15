@@ -1,6 +1,6 @@
 <template>
   <section class="section is-centered columns">
-    <div v-if="cart.length > 0" class="tile is-ancestor ">
+    <div v-if="cart.length > 0" class="tile is-ancestor">
       <div class="tile is-parent is-vertical is-8">
         <article class="tile is-child notification">
           <p class="title">Shopping cart</p>
@@ -74,8 +74,10 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-
+<style scoped>
+html {
+  height: 100%;
+}
 </style>
 
 

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="cart-list">
     <div class="card" v-for="(product, index) in cart" :key="product.id">
       <div class="card-content">
         <div class="media">
@@ -62,6 +62,10 @@ export default {
 </script>
 
 <style scoped>
+.cart-list {
+  max-height: 74.6vh;
+  overflow-y: scroll;
+}
 </style>
 
 
