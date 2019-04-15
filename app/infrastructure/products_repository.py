@@ -119,7 +119,8 @@ class ProductsRepository:
             SELECT u.username, r.id, r.title, r.comment, r.rating, r.timestamp
             FROM {PRODUCTS_TABLE} p, {REVIEWS_TABLE} r, {USERS_TABLE} u
             WHERE p.id={productId} && r.user_id=u.id && r.product_id=p.id
-            ORDER BY r.id LIMIT {offset}, {filters['perPage']}
+            ORDER BY r.id DESC 
+            LIMIT {offset}, {filters['perPage']}
             """)
         try:
             connection = create_connection()
