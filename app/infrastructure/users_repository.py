@@ -53,7 +53,8 @@ class UsersRepository:
             connection = create_connection()
             cursor = connection.cursor()
             cursor.execute(sql_query)
-            return cursor.fetchall()
+            connection.commit()
+            return "Ok"
         except pymysql.err.IntegrityError:
             raise Exception('Duplicate')
         finally:
@@ -71,8 +72,7 @@ class UsersRepository:
             connection = create_connection()
             cursor = connection.cursor()
             cursor.execute(sql_query)
-            connection.commit()
-            return "Ok"
+            return cursor.fetchall()
         finally:
             connection.close()
 
