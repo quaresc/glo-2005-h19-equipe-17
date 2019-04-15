@@ -1,12 +1,12 @@
 <template>
   <div class="data-invoice container">
-    <p class="title-10"> Retail for invoice  #{{id}} </p>
+    <p class="title-10">Retail for invoice #{{ id }}</p>
     <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table>
 
     <div class="buttons margin-top">
-      <router-link :to="{ name: 'Invoice' }">
+      <router-link :to="{ name: 'Invoices' }">
         <button class="button is-secondary">
-          <strong>List Invoices</strong>
+          <strong>Return to invoices list</strong>
         </button>
       </router-link>
     </div>
@@ -24,7 +24,7 @@ export default {
       columns: [
         {
           field: "name",
-          label: "Product name",
+          label: "Product name"
         },
         {
           field: "price",
@@ -38,13 +38,15 @@ export default {
     };
   },
   created() {
-          this.id = this.$route.params.id;
-      },
+    this.id = this.$route.params.id;
+  },
   async mounted() {
     try {
-      this.invoice = await HTTP.get("/users/invoice/"+ this.id).then(response => {
-        return response.data;
-      });
+      this.invoice = await HTTP.get("/users/invoice/" + this.id).then(
+        response => {
+          return response.data;
+        }
+      );
     } catch (error) {
       console.error(error);
     }
@@ -53,18 +55,17 @@ export default {
 </script>
 
 <style scoped>
-
-.title-10{
-margin-bottom:20px;
+.title-10 {
+  margin-bottom: 20px;
 }
 
 .data-invoice {
-margin-top:60px;
-background-color:#F5F5F5;
-padding:20px;
+  margin-top: 60px;
+  background-color: #f5f5f5;
+  padding: 20px;
 }
 
-.margin-top{
-margin-top:20px;
+.margin-top {
+  margin-top: 20px;
 }
 </style>

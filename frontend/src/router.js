@@ -34,7 +34,7 @@ export default new Router({
         },
         {
             path: "/invoices",
-            name: "Invoice",
+            name: "Invoices",
             component: Invoice
         },
         {

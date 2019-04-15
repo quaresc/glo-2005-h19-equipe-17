@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Invoice from "@/components/Invoice.vue";
+import Invoice from "@/components/Invoice/Invoice.vue";
 
 export default {
   name: "invoice",

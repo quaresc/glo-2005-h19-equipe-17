@@ -36,7 +36,10 @@
           >
             Add to cart
           </button>
-          <p v-if="product.quantity === 0" class="subtitle has-text-centered is-6">
+          <p
+            v-if="product.quantity === 0"
+            class="subtitle has-text-centered is-6"
+          >
             This product is currently out of stock
           </p>
         </div>

@@ -90,7 +90,9 @@ export default {
         products.push({ product });
       });
       await HTTP.post("/users/1/purchase", { products }).then(async () => {
-        this.$router.go();
+        this.$router.push({
+          name: "Invoices"
+        });
       });
     }
   }

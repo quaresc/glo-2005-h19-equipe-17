@@ -6,7 +6,7 @@
 
 
 <script>
-import InvoiceRetail from "@/components/InvoiceRetail.vue";
+import InvoiceRetail from "@/components/Invoice/InvoiceRetail.vue";
 
 export default {
   name: "invoiceretail",
