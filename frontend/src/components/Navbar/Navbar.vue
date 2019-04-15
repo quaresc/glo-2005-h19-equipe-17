@@ -54,6 +54,16 @@
       <searchbar class="navbar-item"></searchbar>
       <div class="navbar-end">
         <div class="navbar-item">
+
+        <div class="buttons">
+          <router-link :to="{ name: 'Invoice' }">
+            <button class="button is-secondary">
+              <b-icon icon="file-invoice-dollar" size="is-small"> </b-icon>
+              <strong>Invoices</strong>
+            </button>
+          </router-link>
+        </div>
+
           <div class="buttons">
             <router-link :to="{ name: 'Cart' }">
               <button class="button is-secondary">
@@ -62,6 +72,7 @@
               </button>
             </router-link>
           </div>
+
         </div>
       </div>
     </div>
