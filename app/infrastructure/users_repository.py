@@ -127,12 +127,13 @@ class UsersRepository:
             SELECT id from {INVOICES_TABLE}
             WHERE user_id={userId}
             ORDER BY transaction_date DESC
+            LIMIT 1
             """)
         try:
             connection = create_connection()
             cursor = connection.cursor()
             cursor.execute(sql_query)
-            return cursor.fetchall()
+            return cursor.fetchone()
         finally:
             connection.close()
 
@@ -152,20 +153,21 @@ class UsersRepository:
         finally:
             connection.close()
 
-    def create_invoice_products_values_query(products):
+    def create_invoice_products_values_query(invoiceId, products):
         invoice_products_values = ""
-        print(products)
         for product in products["products"]:
             invoice_products_values += "("
-            invoice_products_values += product['productId']
+            invoice_products_values += str(invoiceId['id'])
             invoice_products_values += ","
-            invoice_products_values += product['quantity']
+            invoice_products_values += str(product['product']['productId'])
+            invoice_products_values += ","
+            invoice_products_values += str(product['product']['quantity'])
             invoice_products_values += "),"
         invoice_products_values = invoice_products_values[:-1]
         return invoice_products_values
 
     def create_invoice_products(userId, products, invoiceId):
-        invoice_products_values = UsersRepository.create_invoice_products_values_query(products)
+        invoice_products_values = UsersRepository.create_invoice_products_values_query(invoiceId, products)
         print("Result:")
         print(invoice_products_values)
         sql_query = (
