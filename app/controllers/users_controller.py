@@ -70,7 +70,9 @@ def submit_cart(userId):
     invoiceId = UsersRepository.get_invoice_id(userId)
     products = get_cart_info()
     UsersRepository.create_invoice_products(userId, products, invoiceId)
+    UsersRepository.delete_cart(userId)
     return "Ok"
+
 
 def get_cart_info():
     request_data = request.get_json()
