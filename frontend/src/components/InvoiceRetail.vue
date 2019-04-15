@@ -58,7 +58,6 @@ export default {
 margin-bottom:20px;
 }
 
-
 .data-invoice {
 margin-top:60px;
 background-color:#F5F5F5;
