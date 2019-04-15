@@ -63,9 +63,10 @@ class UsersRepository:
     def get_cart(userId):
         sql_query = (
             f"""
-            SELECT p.name, p.rating, p.image_url, c.quantity AS quantity
+            SELECT p.id, p.name, p.company, p.rating, p.image_url, p.price, c.quantity AS quantity
             FROM {PRODUCTS_TABLE} AS p INNER JOIN {CARTS_TABLE} AS c ON
-            p.id=c.product_id;
+            p.id=c.product_id
+            WHERE c.user_id={userId}
             """)
         try:
             connection = create_connection()
@@ -133,6 +134,22 @@ class UsersRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query)
             return cursor.fetchall()
+        finally:
+            connection.close()
+
+    def update_cart_quantity(userId, productId, quantity):
+        sql_query = (
+            f"""
+            UPDATE {CARTS_TABLE}
+            SET quantity = {quantity}
+            WHERE user_id = {userId} AND product_id = {productId};
+            """)
+        try:
+            connection = create_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_query)
+            connection.commit()
+            return "Ok"
         finally:
             connection.close()
 

@@ -4,16 +4,15 @@
       <div class="tile is-parent is-vertical is-8">
         <article class="tile is-child notification">
           <p class="title">Shopping cart</p>
-          <cart-list :cart="cart" />
+          <cart-list :cart="cart" :updateQuantity="updateQuantity" />
         </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child notification">
           <div class="content">
             <p class="title">Subtotal</p>
-            <p class="subtitle">With even more content</p>
             <div class="content">
-              <!-- Content -->
+              <p class="subtitle is-3">${{ total }}</p>
             </div>
           </div>
         </article>
@@ -46,6 +45,15 @@ export default {
   components: {
     CartList
   },
+  computed: {
+    total() {
+      let total = 0;
+      this.cart.forEach(element => {
+        total += element.price * element.quantity;
+      });
+      return Number.parseFloat(total).toFixed(2);
+    }
+  },
   async mounted() {
     await this.getCart();
   },
@@ -54,13 +62,22 @@ export default {
       return await HTTP.get(`/users/1/cart`).then(response => {
         return (this.cart = response.data.products);
       });
+    },
+    async updateQuantity(productId, quantity) {
+      await HTTP.patch(`/users/1/cart/${productId}`, {
+        quantity: quantity
+      }).then(async response => {
+        return await this.getCart();
+      });
     }
   }
 };
 </script>
 
-<style lang="sass" scoped>
-
+<style scoped>
+html {
+  height: 100%;
+}
 </style>
 
 
