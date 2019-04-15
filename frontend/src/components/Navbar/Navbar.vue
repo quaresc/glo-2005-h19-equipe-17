@@ -54,14 +54,18 @@
       <searchbar class="navbar-item"></searchbar>
       <div class="navbar-end">
         <div class="navbar-item">
-          <div class="buttons">
-            <router-link :to="{ name: 'Cart' }">
-              <button class="button is-secondary">
-                <b-icon icon="shopping-cart" size="is-small"> </b-icon>
-                <strong>Cart</strong>
-              </button>
-            </router-link>
-          </div>
+          <router-link :to="{ name: 'Invoices' }">
+            <button class="button is-secondary">
+              <b-icon icon="file-invoice-dollar" size="is-small"> </b-icon>
+              <strong>Invoices</strong>
+            </button>
+          </router-link>
+          <router-link :to="{ name: 'Cart' }">
+            <button class="button is-secondary">
+              <b-icon icon="shopping-cart" size="is-small"> </b-icon>
+              <strong>Cart</strong>
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -71,7 +75,6 @@
 <script>
 import { HTTP } from "@/plugins/axios";
 import Searchbar from "@/components/Navbar/Searchbar.vue";
-
 export default {
   data() {
     return {

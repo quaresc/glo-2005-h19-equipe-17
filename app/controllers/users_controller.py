@@ -18,6 +18,20 @@ def get_user(id):
     return jsonify(user)
 
 
+@users.route("/<id>/invoices", methods=["GET"])
+def get_invoice(id):
+    invoice =  UsersRepository.get_invoice(id)
+    if not invoice:
+        return jsonify(message=f"Invoice  with user '{id}' does not exist."), 400
+    return jsonify(invoice)
+
+@users.route("/invoice/<id>", methods=["GET"])
+def get_invoiceById(id):
+    invoice =  UsersRepository.get_invoiceById(id)
+    if not invoice:
+        return jsonify(message=f"Invoice '{id}' does not exist."), 400
+    return jsonify(invoice)
+
 @users.route("/<userId>/cart/<productId>", methods=["POST"])
 def add_product_to_cart(userId, productId):
     cart = get_cart_quantity()

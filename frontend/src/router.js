@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/views/Home.vue";
+import Invoice from "@/views/Invoice.vue";
+import InvoiceRetail from "@/views/InvoiceRetail.vue";
 import NotFound from "@/views/NotFound.vue";
 import ProductView from "@/views/ProductView.vue";
 import Catalog from "@/components/Products/Catalog.vue";
@@ -29,6 +31,16 @@ export default new Router({
             path: "/catalog/:department?",
             name: "Catalog",
             component: Catalog
+        },
+        {
+            path: "/invoices",
+            name: "Invoices",
+            component: Invoice
+        },
+        {
+            path: "/invoice/:id",
+            name: "InvoiceRetail",
+            component: InvoiceRetail
         },
         {
             path: "/cart",
