@@ -152,8 +152,20 @@ class UsersRepository:
         finally:
             connection.close()
 
-    def create_invoice_products(userId, cart, invoiceId):
-        invoice_products_values = create_invoice_products_values_query(cart)
+    def create_invoice_products_values_query(products):
+        invoice_products_values = ""
+        print(products)
+        for product in products["products"]:
+            invoice_products_values += "("
+            invoice_products_values += product['productId']
+            invoice_products_values += ","
+            invoice_products_values += product['quantity']
+            invoice_products_values += "),"
+        invoice_products_values = invoice_products_values[:-1]
+        return invoice_products_values
+
+    def create_invoice_products(userId, products, invoiceId):
+        invoice_products_values = UsersRepository.create_invoice_products_values_query(products)
         print("Result:")
         print(invoice_products_values)
         sql_query = (
@@ -169,24 +181,3 @@ class UsersRepository:
             return "Ok"
         finally:
             connection.close()
-
-    def create_invoice_products_values_query(products):
-        invoice_products_values = ""
-        print("Products")
-        print(products['product'])
-        print("Products minus one")
-        print(products['product':-1])
-        for product in products['product':-1]:
-            print("Product")
-            print(product)
-            invoice_products_values += "("
-            invoice_products_values += product['product_id']
-            invoice_products_values += product[', ']
-            invoice_products_values += product['quantity']
-            invoice_products_values += "), "
-        invoice_products_values += "("
-        invoice_products_values += product['product_id']
-        invoice_products_values += product[', ']
-        invoice_products_values += product['quantity']
-        invoice_products_values += ")"
-        return invoice_products_values

@@ -74,8 +74,8 @@ def submit_cart(userId):
 
 def get_cart_info():
     request_data = request.get_json()
-    products = request_data['cart']['products']
-    cart = {
+    products = request_data['products']
+    products = {
         "products": products,
     }
-    return cart
+    return products

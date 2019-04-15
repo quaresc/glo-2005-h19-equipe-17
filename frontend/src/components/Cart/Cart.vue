@@ -74,6 +74,19 @@ export default {
       await HTTP.delete("/users/1/cart").then(async () => {
         this.$router.go();
       });
+    },
+    async submitPurchase() {
+      let products = [];
+      this.cart.forEach(element => {
+        let product = {
+          productId: element.id,
+          quantity: element.quantity
+        };
+        products.push( {product} );
+      });
+      await HTTP.post("/users/1/purchase", { products }).then(async () => {
+        this.$router.go();
+      });
     }
   }
 };
