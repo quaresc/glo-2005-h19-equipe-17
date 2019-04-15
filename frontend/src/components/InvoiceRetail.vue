@@ -1,8 +1,9 @@
 <template>
   <div class="data-invoice container">
+    <p class="title-10"> Retail for invoice  #{{id}} </p>
     <b-table :data="invoice" :columns="columns" v-if="invoice"></b-table>
 
-    <div class="buttons">
+    <div class="buttons margin-top">
       <router-link :to="{ name: 'Invoice' }">
         <button class="button is-secondary">
           <strong>List Invoices</strong>
@@ -52,7 +53,19 @@ export default {
 </script>
 
 <style scoped>
+
+.title-10{
+margin-bottom:20px;
+}
+
+
 .data-invoice {
-  margin-top:60px;
+margin-top:60px;
+background-color:#F5F5F5;
+padding:20px;
+}
+
+.margin-top{
+margin-top:20px;
 }
 </style>
