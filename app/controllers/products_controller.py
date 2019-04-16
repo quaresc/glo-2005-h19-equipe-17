@@ -40,10 +40,10 @@ def get_filters():
     rating = request.args.get('rating') or DEFAULT_RATING
     search = request.args.get('search') or None
     filters = {
-        "page": int(page),
-        "perPage": int(perPage),
-        "rating": int(rating),
-        "search": search
+        'page': int(page),
+        'perPage': int(perPage),
+        'rating': int(rating),
+        'search': search
     }
     return filters
 
