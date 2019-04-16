@@ -42,3 +42,36 @@ BEGIN
 	WHERE id = NEW.product_id;
 END;//
 delimiter ;
+
+delimiter //
+CREATE DEFINER = CURRENT_USER TRIGGER cart__quantity_zero__BEFORE_INSERT
+BEFORE INSERT ON carts
+FOR EACH ROW
+BEGIN
+	DECLARE product_quantity INTEGER DEFAULT 0;
+
+	SET product_quantity = NEW.quantity;
+
+	IF product_quantity <= 0 THEN
+	   SIGNAL SQLSTATE '45000'
+	   SET MESSAGE_TEXT='Can not have a quantity 0 for a product in a cart';
+	END IF;
+END;//
+delimiter ;
+
+
+delimiter //
+CREATE DEFINER = CURRENT_USER TRIGGER cart__quantity_zero__BEFORE_UPDATE
+BEFORE UPDATE ON carts
+FOR EACH ROW
+BEGIN
+	DECLARE product_quantity INTEGER DEFAULT 0;
+
+	SET product_quantity = NEW.quantity;
+
+	IF product_quantity <= 0 THEN
+	   SIGNAL SQLSTATE '45000'
+	   SET MESSAGE_TEXT='Can not have a quantity 0 for a product in a cart.';
+	END IF;
+END;//
+delimiter ;
