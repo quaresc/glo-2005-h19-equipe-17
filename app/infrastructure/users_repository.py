@@ -7,9 +7,8 @@ class UsersRepository:
     def get_users():
         sql_query = (
             """
-            SELECT id, first_name, last_name, username, email, password, INET_NTOA(ip_address)
-            as ip_address, registration_date, activated
-            FROM `users`
+            SELECT *
+            FROM `users_view`
             """)
         try:
             connection = create_connection()
