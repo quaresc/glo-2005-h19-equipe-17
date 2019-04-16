@@ -12175,3 +12175,5 @@ In congue. Etiam justo. Etiam pretium iaculis justo.', 4.9) ,
 Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius.
 
 Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.', 1.5);
+
+CALL UpdateProductsRating();

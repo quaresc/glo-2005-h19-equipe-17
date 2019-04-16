@@ -4,11 +4,9 @@
       <div class="tile is-parent is-vertical is-8">
         <article class="tile is-child notification">
           <p class="title">Shopping cart</p>
-          <cart-list :cart="cart" :updateQuantity="updateQuantity" />
-          <br />
-          <button class="button is-secondary" @click="deleteCart()">
-            Delete cart
-          </button>
+          <cart-list :cart="cart" :updateQuantity="updateQuantity"/>
+          <br>
+          <button class="button is-secondary" @click="deleteCart()">Delete cart</button>
         </article>
       </div>
       <div class="tile is-parent">
@@ -19,9 +17,7 @@
               <p class="subtitle is-3">${{ total }}</p>
             </div>
           </div>
-          <button class="button is-primary" @click="submitPurchase()">
-            Confirm purchase
-          </button>
+          <button class="button is-primary" @click="submitPurchase()">Confirm purchase</button>
         </article>
       </div>
     </div>
@@ -92,6 +88,12 @@ export default {
       await HTTP.post("/users/1/purchase", { products }).then(async () => {
         this.$router.push({
           name: "Invoices"
+        });
+        this.$toast.open({
+          duration: 5000,
+          message: "Thank you for your purchase !",
+          position: "is-bottom",
+          type: "is-success"
         });
       });
     }

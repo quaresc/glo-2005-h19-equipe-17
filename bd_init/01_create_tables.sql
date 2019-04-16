@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS products (
   description VARCHAR(1000) NOT NULL,
   product_type_id INT NOT NULL,
   company VARCHAR(45) NOT NULL,
-  price DOUBLE(5,2) NOT NULL,
+  price DOUBLE(5,2) UNSIGNED NOT NULL,
   rating TINYINT(1) UNSIGNED NOT NULL,
-  weight DOUBLE(5,2) NOT NULL,
+  weight DOUBLE(5,2) UNSIGNED NOT NULL,
   quantity INT UNSIGNED NOT NULL,
   image_url TEXT NOT NULL,
   PRIMARY KEY (id),
@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS products (
   CONSTRAINT fk__products__product_types
     FOREIGN KEY (product_type_id)
     REFERENCES product_types (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 DROP TABLE IF EXISTS invoices;
@@ -85,8 +85,8 @@ CREATE TABLE IF NOT EXISTS carts (
   CONSTRAINT fk__carts__products
     FOREIGN KEY (product_id)
     REFERENCES products (id)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 
