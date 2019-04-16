@@ -1,16 +1,13 @@
 import pymysql.cursors
 from config import create_connection
 
-PRODUCTS_TYPES_TABLE = "product_types"
-
 
 class DepartmentsRepository:
 
     def get_departments():
         sql_query = (
-            f"""
-            SELECT name
-            FROM {PRODUCTS_TYPES_TABLE}
+            """
+            SELECT name FROM `product_types`
             """)
         try:
             connection = create_connection()
