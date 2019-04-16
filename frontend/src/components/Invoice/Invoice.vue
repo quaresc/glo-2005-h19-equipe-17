@@ -1,6 +1,6 @@
 <template>
   <div v-if="invoice && username" class="data-invoice container">
-    <p class="user">All invoice for {{ username.username }}</p>
+    <p class="user">{{ username.username }}'s invoices</p>
     <table class="table">
       <thead>
         <tr>

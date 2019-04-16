@@ -30,9 +30,12 @@
                 v-model="quantity[index]"
                 @input="updateQuantity(product.id, quantity[index])"
               >
-                <option v-for="index in 10" :value="index" :key="index">{{
-                  index
-                }}</option>
+                <option
+                  v-for="index in product.remaining_quantity"
+                  :value="index"
+                  :key="index"
+                  >{{ index }}</option
+                >
               </b-select>
               <button
                 class="button is-secondary"
@@ -76,11 +79,10 @@ export default {
 };
 </script>
 
-<style scoped>
-.cart-list {
+<style lang="sass" scoped>
+.cart-list
   max-height: 67vh;
   overflow-y: scroll;
-}
 </style>
 
 

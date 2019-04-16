@@ -39,7 +39,7 @@ class UsersRepository:
             if not user:
                 return None
             return {'firstName': user['first_name'],
-                    'lastName': user['last_name'], 'username' : user['username']}
+                    'lastName': user['last_name'], 'username': user['username']}
         finally:
             connection.close()
 
@@ -83,7 +83,7 @@ class UsersRepository:
     def get_cart(userId):
         sql_query = (
             f"""
-            SELECT p.id, p.name, p.company, p.rating, p.image_url, p.price, c.quantity AS quantity
+            SELECT p.id, p.name, p.company, p.rating, p.image_url, p.price, p.quantity AS remaining_quantity, c.quantity AS quantity
             FROM {PRODUCTS_TABLE} AS p INNER JOIN {CARTS_TABLE} AS c ON
             p.id=c.product_id
             WHERE c.user_id={userId}
@@ -187,7 +187,8 @@ class UsersRepository:
         return invoice_products_values
 
     def create_invoice_products(userId, products, invoiceId):
-        invoice_products_values = UsersRepository.create_invoice_products_values_query(invoiceId, products)
+        invoice_products_values = UsersRepository.create_invoice_products_values_query(
+            invoiceId, products)
         print("Result:")
         print(invoice_products_values)
         sql_query = (

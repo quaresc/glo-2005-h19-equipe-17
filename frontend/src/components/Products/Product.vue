@@ -14,18 +14,31 @@
               <p class="subtitle is-4">
                 {{ product.type }} - Seller: {{ product.company }}
               </p>
-              <div class="subtitle is-6">{{ product.ean }}</div>
               <star-rating
                 :rating="product.rating"
                 read-only
                 :show-rating="false"
                 :star-size="20"
               />
-              <p class="subtitle is-6">Price: ${{ product.price }}</p>
+              <br />
+              <p class="title is-5">Description</p>
+              <p class="subtitle is-6">{{ product.description }}</p>
               <p class="subtitle is-6">Weight: {{ product.weight }}kg</p>
-              <p class="subtitle is-6">
-                Description: {{ product.description }}
-              </p>
+            </div>
+            <div class="media-right has-text-centered">
+              <span class="tag is-secondary is-large is-rounded"
+                >${{ product.price }}</span
+              >
+              <br />
+              <br />
+              <span
+                class="tag is-primary is-medium is-rounded"
+                v-if="product.quantity > 0 && product.quantity < 10"
+                ><strong>{{ product.quantity }} remaining, hurry!</strong></span
+              >
+              <span class="tag is-primary is-medium is-rounded" v-else
+                ><strong>{{ product.quantity }} remaining</strong></span
+              >
             </div>
           </div>
           <br />
