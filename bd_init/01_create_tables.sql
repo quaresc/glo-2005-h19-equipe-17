@@ -44,6 +44,8 @@ CREATE TABLE IF NOT EXISTS products (
   image_url TEXT NOT NULL,
   PRIMARY KEY (id),
   UNIQUE INDEX ean_UNIQUE (ean ASC),
+  INDEX product_rating__INDEX USING BTREE (rating ASC),
+  INDEX product_name__INDEX (name ASC),
   INDEX fk__products__products_types_idx (product_type_id ASC),
   CONSTRAINT fk__products__product_types
     FOREIGN KEY (product_type_id)
@@ -76,7 +78,7 @@ CREATE TABLE IF NOT EXISTS carts (
   quantity INT NOT NULL,
   INDEX fk__carts__users_idx (user_id ASC),
   INDEX fk__carts__products_idx (product_id ASC),
-  UNIQUE INDEX `user_id__product_id__UNIQUE` (`user_id` ASC, `product_id` ASC),
+  UNIQUE INDEX user_id__product_id__UNIQUE (user_id ASC, product_id ASC),
   CONSTRAINT fk__carts__users
     FOREIGN KEY (user_id)
     REFERENCES users (id)
@@ -103,7 +105,8 @@ CREATE TABLE IF NOT EXISTS reviews (
   PRIMARY KEY (id),
   INDEX fk__reviews__users_idx (user_id ASC),
   INDEX fk__reviews__products_idx (product_id ASC),
-  UNIQUE INDEX `user_id__product_id__UNIQUE` (`user_id` ASC, `product_id` ASC),
+  UNIQUE INDEX user_id__product_id__UNIQUE (user_id ASC, product_id ASC),
+  INDEX review_rating__INDEX USING BTREE (rating ASC),
   CONSTRAINT fk__reviews__users
     FOREIGN KEY (user_id)
     REFERENCES users (id)
