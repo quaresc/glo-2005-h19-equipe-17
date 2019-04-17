@@ -39,10 +39,11 @@ export default {
   },
   created() {
     this.id = this.$route.params.id;
+    this.userid = 1;
   },
   async mounted() {
     try {
-      this.invoice = await HTTP.get("/users/invoice/" + this.id)
+      this.invoice = await HTTP.get("/users/" + this.userid + "/invoice/" + this.id)
         .then(response => {
           return response.data;
         })

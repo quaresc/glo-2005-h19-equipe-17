@@ -35,10 +35,10 @@ def get_invoice(id):
         return jsonify(message=f"Cannot get invoice for user {id}."), 500
 
 
-@users.route("/invoice/<id>", methods=["GET"])
-def get_invoiceById(id):
+@users.route("/<userid>/invoice/<id>", methods=["GET"])
+def get_invoiceById(userid, id):
     try:
-        invoice = UsersRepository.get_invoiceById(id)
+        invoice = UsersRepository.get_invoiceById(id, userid)
         if not invoice:
             return jsonify(message=f"Invoice '{id}' does not exist."), 400
         return jsonify(invoice)
