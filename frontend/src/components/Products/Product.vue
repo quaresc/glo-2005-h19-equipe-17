@@ -109,22 +109,22 @@ export default {
       try {
         await HTTP.post("/users/" + userId + "/cart/" + productId, {
           cart
-        }).then(response => {
-          if (response.data === "Duplicate") {
-            this.$toast.open({
-              duration: 5000,
-              message: "You already added this product to your cart.",
-              position: "is-bottom",
-              type: "is-danger"
-            });
-          } else {
+        })
+          .then(() =>
             this.$toast.open({
               message: "You added this product to your cart!",
               type: "is-success",
               position: "is-bottom"
-            });
-          }
-        });
+            })
+          )
+          .catch(error =>
+            this.$toast.open({
+              duration: 5000,
+              message: error.response.data.message,
+              position: "is-bottom",
+              type: "is-danger"
+            })
+          );
       } catch (error) {
         console.error(error);
       }

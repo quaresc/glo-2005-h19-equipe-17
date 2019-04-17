@@ -10,7 +10,7 @@ def get_users():
         users = UsersRepository.get_users()
         return jsonify(users)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch users."), 500
 
 
 @users.route("/<id>", methods=["GET"])
@@ -21,7 +21,7 @@ def get_user(id):
             return jsonify(message=f"User '{id}' does not exist."), 400
         return jsonify(user)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch user {id}."), 500
 
 
 @users.route("/<id>/invoices", methods=["GET"])
@@ -29,10 +29,10 @@ def get_invoice(id):
     try:
         invoice = UsersRepository.get_invoice(id)
         if not invoice:
-            return jsonify(message=f"Invoice  with user '{id}' does not exist."), 400
+            return jsonify(message=f"Invoice with user '{id}' does not exist."), 400
         return jsonify(invoice)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot get invoice for user {id}."), 500
 
 
 @users.route("/invoice/<id>", methods=["GET"])
@@ -43,7 +43,7 @@ def get_invoiceById(id):
             return jsonify(message=f"Invoice '{id}' does not exist."), 400
         return jsonify(invoice)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch invoice {id}."), 500
 
 
 @users.route("/<userId>/cart/<productId>", methods=["POST"])
@@ -53,7 +53,7 @@ def add_product_to_cart(userId, productId):
         UsersRepository.add_product_to_cart(userId, productId, cart)
         return "", 201
     except Exception:
-        return "Duplicate"
+        return jsonify(message=f"You already added this product to your cart."), 500
 
 
 def get_cart_quantity():
@@ -71,7 +71,7 @@ def get_cart(userId):
         products = UsersRepository.get_cart(userId)
         return jsonify(products=products)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch cart."), 500
 
 
 @users.route("/<userId>/cart/<productId>", methods=["PATCH"])
@@ -83,7 +83,7 @@ def update_cart_quantity(userId, productId):
             UsersRepository.update_cart_quantity(userId, productId, quantity)
         return '', 204
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot update cart."), 500
 
 
 @users.route("/<userId>/cart/<productId>", methods=["DELETE"])
@@ -92,7 +92,7 @@ def delete_product_from_cart(userId, productId):
         UsersRepository.delete_product_from_cart(userId, productId)
         return "", 200
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot delete product from cart."), 500
 
 
 @users.route("/<userId>/cart", methods=["DELETE"])
@@ -101,7 +101,7 @@ def delete_cart(userId):
         UsersRepository.delete_cart(userId)
         return "", 200
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot delete cart."), 500
 
 
 @users.route("/<userId>/purchase", methods=["POST"])
@@ -114,7 +114,7 @@ def submit_cart(userId):
         UsersRepository.delete_cart(userId)
         return "", 200
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot process current cart."), 500
 
 
 def get_cart_info():

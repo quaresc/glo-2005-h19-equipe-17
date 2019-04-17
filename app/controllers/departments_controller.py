@@ -10,4 +10,4 @@ def get_departments():
         departments = DepartmentsRepository.get_departments()
         return jsonify(departments=departments)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch departments"), 500

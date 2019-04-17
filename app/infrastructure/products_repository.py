@@ -192,6 +192,6 @@ class ProductsRepository:
                                        review['title'], review['comment'], review['rating']))
             connection.commit()
         except pymysql.err.IntegrityError:
-            raise Exception('Duplicate')
+            raise RuntimeError('Duplicate')
         finally:
             connection.close()

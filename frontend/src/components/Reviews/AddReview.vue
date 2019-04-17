@@ -79,22 +79,22 @@ export default {
         try {
           await HTTP.put("/products/" + productId + "/reviews/" + userId, {
             review
-          }).then(response => {
-            if (response.data === "Duplicate") {
-              this.$toast.open({
-                duration: 5000,
-                message: "You already added a review for this product.",
-                position: "is-bottom",
-                type: "is-danger"
-              });
-            } else {
+          })
+            .then(() => {
               this.$toast.open({
                 message: "Thank you for your review!",
                 type: "is-success"
               });
               this.$router.go();
-            }
-          });
+            })
+            .catch(error =>
+              this.$toast.open({
+                duration: 5000,
+                message: error.response.data.message,
+                position: "is-bottom",
+                type: "is-danger"
+              })
+            );
         } catch (error) {
           console.error(error);
         }

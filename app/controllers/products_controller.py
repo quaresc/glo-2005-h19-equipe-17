@@ -24,7 +24,7 @@ def get_products():
         total_pages = ceil(total_products / filters['perPage'])
         return jsonify(products=products, total_products=total_products, total_pages=total_pages)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch products"), 500
 
 
 @products.route("/department/<department>", methods=["GET"])
@@ -38,7 +38,7 @@ def get_departement_products(department):
         total_pages = ceil(total_products / filters['perPage'])
         return jsonify(products=products, total_products=total_products, total_pages=total_pages)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch {department} products."), 500
 
 
 @products.route("/<id>", methods=["GET"])
@@ -47,7 +47,7 @@ def get_product(id):
         product = ProductsRepository.get_product(id)
         return jsonify(product=product)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch product {id}."), 500
 
 
 @products.route("/<id>/reviews", methods=["GET"])
@@ -60,7 +60,7 @@ def get_product_reviews(id):
         total_pages = ceil(total_product_reviews / filters['perPage'])
         return jsonify(product_reviews=product_reviews, total_product_reviews=total_product_reviews, total_pages=total_pages)
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot fetch reviews for product {id}."), 500
 
 
 @products.route("/<productId>/reviews/<userId>", methods=["PUT"])
@@ -69,8 +69,10 @@ def add_product_review(productId, userId):
         review = get_review()
         ProductsRepository.add_product_review(productId, userId, review)
         return "", 201
+    except RuntimeError:
+        return jsonify(message=f"You already added a review for this product."), 400
     except Exception:
-        return jsonify(message=f"An error has occured"), 500
+        return jsonify(message=f"Cannot add a review for product {productId}."), 500
 
 
 def get_review():
