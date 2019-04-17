@@ -7,26 +7,27 @@
       v-on:update:rating="updateFilter"
       :department="department"
     />
-    <div
-      class="columns is-centered is-multiline"
-      v-if="products && products.length !== 0"
-    >
-      <catalog-detail
-        v-for="(product, index) in products"
-        :product="product"
-        :key="index"
-      ></catalog-detail>
-      <div class="column is-half">
-        <b-pagination
-          class="pagination"
-          :total="total"
-          :current.sync="currentPage"
-          :per-page="perPage"
-          rounded
-          order="is-centered"
-          v-on:update:current="getProducts"
-        >
-        </b-pagination>
+    <div v-if="products && products.length !== 0">
+      <div class="columns is-centered is-multiline">
+        <catalog-detail
+          v-for="(product, index) in products"
+          :product="product"
+          :key="index"
+        ></catalog-detail>
+      </div>
+      <div class="columns is-centered is-multiline">
+        <div class="column is-half">
+          <b-pagination
+            class="pagination"
+            :total="total"
+            :current.sync="currentPage"
+            :per-page="perPage"
+            rounded
+            order="is-centered"
+            v-on:update:current="getProducts"
+          >
+          </b-pagination>
+        </div>
       </div>
       <b-loading :is-full-page="false" :active.sync="isLoading"></b-loading>
     </div>
@@ -101,11 +102,20 @@ export default {
             ? "/products/department/" + this.$route.params.department
             : "/products",
           { params }
-        ).then(response => {
-          this.products = response.data.products;
-          this.total = response.data.total_products;
-          this.isLoading = false;
-        });
+        )
+          .then(response => {
+            this.products = response.data.products;
+            this.total = response.data.total_products;
+            this.isLoading = false;
+          })
+          .catch(error =>
+            this.$toast.open({
+              duration: 5000,
+              message: error.response.data.message,
+              position: "is-bottom",
+              type: "is-danger"
+            })
+          );
         window.scrollTo(0, 0);
       } catch (error) {
         console.error(error);

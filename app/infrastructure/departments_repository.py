@@ -14,5 +14,7 @@ class DepartmentsRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query)
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()

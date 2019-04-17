@@ -7,15 +7,16 @@ class UsersRepository:
     def get_users():
         sql_query = (
             """
-            SELECT id, first_name, last_name, username, email, password, INET_NTOA(ip_address)
-            as ip_address, registration_date, activated
-            FROM `users`
+            SELECT *
+            FROM `users_view`
             """)
         try:
             connection = create_connection()
             cursor = connection.cursor()
             cursor.execute(sql_query)
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -33,6 +34,8 @@ class UsersRepository:
                 return None
             return {'firstName': user['first_name'],
                     'lastName': user['last_name'], 'username': user['username']}
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -50,6 +53,8 @@ class UsersRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (id,))
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -65,6 +70,8 @@ class UsersRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (id,))
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -98,6 +105,8 @@ class UsersRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (userId,))
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -113,6 +122,8 @@ class UsersRepository:
             cursor.execute(sql_query, (userId, productId))
             connection.commit()
             return "Ok"
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -128,6 +139,8 @@ class UsersRepository:
             cursor.execute(sql_query, (userId,))
             connection.commit()
             return "Ok"
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -143,6 +156,8 @@ class UsersRepository:
             cursor.execute(sql_query, (userId,))
             connection.commit()
             return "Ok"
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -159,6 +174,8 @@ class UsersRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (userId,))
             return cursor.fetchone()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -176,6 +193,8 @@ class UsersRepository:
                 sql_query, (quantity, userId, productId))
             connection.commit()
             return "Ok"
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -206,5 +225,7 @@ class UsersRepository:
             cursor.execute(sql_query)
             connection.commit()
             return "Ok"
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()

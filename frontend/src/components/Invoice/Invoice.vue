@@ -42,14 +42,30 @@ export default {
   },
   async mounted() {
     try {
-      this.invoice = await HTTP.get("/users/" + this.id + "/invoices").then(
-        response => {
+      this.invoice = await HTTP.get("/users/" + this.id + "/invoices")
+        .then(response => {
           return response.data;
-        }
-      );
-      this.username = await HTTP.get("/users/" + this.id).then(response => {
-        return response.data;
-      });
+        })
+        .catch(error =>
+          this.$toast.open({
+            duration: 5000,
+            message: error.response.data.message,
+            position: "is-bottom",
+            type: "is-danger"
+          })
+        );
+      this.username = await HTTP.get("/users/" + this.id)
+        .then(response => {
+          return response.data;
+        })
+        .catch(error =>
+          this.$toast.open({
+            duration: 5000,
+            message: error.response.data.message,
+            position: "is-bottom",
+            type: "is-danger"
+          })
+        );
     } catch (error) {
       console.error(error);
     }

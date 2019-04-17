@@ -6,5 +6,8 @@ departments = Blueprint('departments', __name__)
 
 @departments.route("/", methods=["GET"])
 def get_departments():
-    departments = DepartmentsRepository.get_departments()
-    return jsonify(departments=departments)
+    try:
+        departments = DepartmentsRepository.get_departments()
+        return jsonify(departments=departments)
+    except Exception:
+        return jsonify(message=f"Cannot fetch departments"), 500
