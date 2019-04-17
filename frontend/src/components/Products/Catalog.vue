@@ -102,11 +102,20 @@ export default {
             ? "/products/department/" + this.$route.params.department
             : "/products",
           { params }
-        ).then(response => {
-          this.products = response.data.products;
-          this.total = response.data.total_products;
-          this.isLoading = false;
-        });
+        )
+          .then(response => {
+            this.products = response.data.products;
+            this.total = response.data.total_products;
+            this.isLoading = false;
+          })
+          .catch(error =>
+            this.$toast.open({
+              duration: 5000,
+              message: error.response.data.message,
+              position: "is-bottom",
+              type: "is-danger"
+            })
+          );
         window.scrollTo(0, 0);
       } catch (error) {
         console.error(error);

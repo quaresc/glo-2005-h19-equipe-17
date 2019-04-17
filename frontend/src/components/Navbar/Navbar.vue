@@ -90,9 +90,18 @@ export default {
   methods: {
     async getDepartements() {
       try {
-        await HTTP.get("/departments/").then(response => {
-          this.departments = response.data.departments;
-        });
+        await HTTP.get("/departments/")
+          .then(response => {
+            this.departments = response.data.departments;
+          })
+          .catch(error =>
+            this.$toast.open({
+              duration: 5000,
+              message: error.response.data.message,
+              position: "is-bottom",
+              type: "is-danger"
+            })
+          );
       } catch (error) {
         console.error(error);
       }

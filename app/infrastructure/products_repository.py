@@ -20,6 +20,8 @@ class ProductsRepository:
             cursor.execute(
                 sql_query, (filters['rating'], offset, filters['perPage']))
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -40,6 +42,8 @@ class ProductsRepository:
             cursor.execute(sql_query, (
                 filters['rating'], department, offset, filters['perPage']))
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -60,6 +64,8 @@ class ProductsRepository:
             cursor.execute(
                 sql_query, (filters['rating'], "%" + search + "%", offset, filters['perPage']))
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -75,6 +81,8 @@ class ProductsRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (filters['rating'],))
             return int(cursor.fetchone()["total"])
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -92,6 +100,8 @@ class ProductsRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (filters['rating'], department))
             return int(cursor.fetchone()["total"])
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -108,6 +118,8 @@ class ProductsRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (productId,))
             return cursor.fetchone()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -126,6 +138,8 @@ class ProductsRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (productId, offset, filters['perPage']))
             return cursor.fetchall()
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -143,6 +157,8 @@ class ProductsRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (filters['rating'], "%" + search + "%"))
             return int(cursor.fetchone()["total"])
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 
@@ -158,6 +174,8 @@ class ProductsRepository:
             cursor = connection.cursor()
             cursor.execute(sql_query, (productId, ))
             return int(cursor.fetchone()["total"])
+        except pymysql.Error:
+            raise Exception("Something went wrong")
         finally:
             connection.close()
 

@@ -61,13 +61,20 @@ export default {
       };
       let productId = this.$route.params.id;
       try {
-        await HTTP.get("/products/" + productId + "/reviews", { params }).then(
-          response => {
+        await HTTP.get("/products/" + productId + "/reviews", { params })
+          .then(response => {
             this.reviews = response.data.product_reviews;
             this.total = response.data.total_product_reviews;
             this.isLoading = false;
-          }
-        );
+          })
+          .catch(error =>
+            this.$toast.open({
+              duration: 5000,
+              message: error.response.data.message,
+              position: "is-bottom",
+              type: "is-danger"
+            })
+          );
       } catch (error) {
         console.error(error);
       }

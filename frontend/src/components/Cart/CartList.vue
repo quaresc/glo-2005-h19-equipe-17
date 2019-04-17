@@ -71,9 +71,18 @@ export default {
   },
   methods: {
     async deleteFromCart(productId) {
-      await HTTP.delete("/users/1/cart/" + productId, {}).then(async () => {
-        this.$router.go();
-      });
+      await HTTP.delete("/users/1/cart/" + productId, {})
+        .then(async () => {
+          this.$router.go();
+        })
+        .catch(error =>
+          this.$toast.open({
+            duration: 5000,
+            message: error.response.data.message,
+            position: "is-bottom",
+            type: "is-danger"
+          })
+        );
     }
   }
 };
