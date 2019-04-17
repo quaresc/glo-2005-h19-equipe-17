@@ -58,7 +58,7 @@ class UsersRepository:
         finally:
             connection.close()
 
-    def get_invoiceById(userid, id):
+    def get_invoiceById(id, userid):
         sql_query = (
             """
             SELECT i.transaction_date, ip.invoice_id, p.name, ip.quantity, p.price
