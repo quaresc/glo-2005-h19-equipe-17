@@ -58,17 +58,17 @@ class UsersRepository:
         finally:
             connection.close()
 
-    def get_invoiceById(id):
+    def get_invoiceById(id, userid):
         sql_query = (
             """
             SELECT i.transaction_date, ip.invoice_id, p.name, ip.quantity, p.price
             FROM `invoice_products` AS ip, products AS p, `invoices` AS i
-            WHERE invoice_id=%s AND ip.product_id=p.id AND ip.invoice_id=i.id
+            WHERE invoice_id=%s AND ip.product_id=p.id AND ip.invoice_id=i.id AND i.user_id=%s;
             """)
         try:
             connection = create_connection()
             cursor = connection.cursor()
-            cursor.execute(sql_query, (id,))
+            cursor.execute(sql_query, (id,userid))
             return cursor.fetchall()
         except pymysql.Error:
             raise Exception("Something went wrong")
